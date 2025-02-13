@@ -10,5 +10,6 @@ const {
 const projectsRouter = Router();
 
 projectsRouter.post('/', authenticateLoginToken, addProject);
+projectsRouter.put('/', authenticateLoginToken, updateProjectById);
 
 module.exports = projectsRouter;

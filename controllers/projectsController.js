@@ -21,9 +21,9 @@ const addProject = async (req, res) => {
 };
 
 const updateProjectById = async (req, res) => {
-    const { projectId } = req.body;
+    const { projectId, projectName } = req.body;
     try {
-        const data = await _updateProjectById(projectId);
+        const data = await _updateProjectById(projectId, projectName);
         if (data.success) {
             res.status(200).json(data);
         } else {
