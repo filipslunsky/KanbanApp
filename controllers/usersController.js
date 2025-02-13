@@ -1,5 +1,4 @@
 const dotenv = require('dotenv');
-const path = require('path');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {

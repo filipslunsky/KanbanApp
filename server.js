@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 
 const usersRouter = require('./routes/usersRouter.js');
+const projectsRouter = require('./routes/projectsRouter.js');
 
 const PORT = 3001;
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/user', usersRouter);
+app.use('/projects', projectsRouter);
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 app.get("*", (req, res) => {

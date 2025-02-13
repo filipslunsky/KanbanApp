@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const path = require('path');
 const { authenticateLoginToken } = require('../middlewares/authenticate.js');
 const {
     registeUser,
