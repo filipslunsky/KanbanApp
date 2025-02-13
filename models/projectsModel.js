@@ -59,7 +59,32 @@ const _updateProjectById = async (projectId, projectName) => {
     }
 };
 
-const _deleteProjectById = async (projectId) => {};
+const _deleteProjectById = async (projectId) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const project = await trx('projects')
+                .select('project_id')
+                .where({ project_id: projectId })
+                .first();
+
+            if (!project) {
+                return { success: false, message: 'Project not found' };
+            };
+
+            const updatedProject = await trx('projects')
+            .delete()
+            .where({project_id: projectId});
+
+            return { 
+                success: true, 
+                message: 'Project successfully deleted',
+            };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error deleting project: ${error.message}` };
+    }
+};
 
 const _getProjectsByUserId = async (userId) => {};
 

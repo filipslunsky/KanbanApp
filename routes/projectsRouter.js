@@ -11,5 +11,6 @@ const projectsRouter = Router();
 
 projectsRouter.post('/', authenticateLoginToken, addProject);
 projectsRouter.put('/', authenticateLoginToken, updateProjectById);
+projectsRouter.post('/delete', authenticateLoginToken, deleteProjectById);
 
 module.exports = projectsRouter;
