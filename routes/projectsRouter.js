@@ -4,7 +4,7 @@ const {
     addProject,
     updateProjectById,
     deleteProjectById,
-    getCategoriesByProjectId,
+    getProjectsByProjectId,
 } = require('../controllers/projectsController.js');
 
 const projectsRouter = Router();
@@ -12,5 +12,6 @@ const projectsRouter = Router();
 projectsRouter.post('/', authenticateLoginToken, addProject);
 projectsRouter.put('/', authenticateLoginToken, updateProjectById);
 projectsRouter.post('/delete', authenticateLoginToken, deleteProjectById);
+projectsRouter.post('/all', authenticateLoginToken, getProjectsByProjectId);
 
 module.exports = projectsRouter;

@@ -71,7 +71,7 @@ const _deleteProjectById = async (projectId) => {
                 return { success: false, message: 'Project not found' };
             };
 
-            const updatedProject = await trx('projects')
+            await trx('projects')
             .delete()
             .where({project_id: projectId});
 
@@ -86,7 +86,32 @@ const _deleteProjectById = async (projectId) => {
     }
 };
 
-const _getProjectsByUserId = async (userId) => {};
+const _getProjectsByUserId = async (userId) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const user = await trx('users')
+                .select('user_id')
+                .where({ user_id: userId })
+                .first();
+
+            if (!user) {
+                return { success: false, message: 'User not found' };
+            };
+
+            const projects = await trx('projects')
+            .select('project_id', 'project_name', 'user_id')
+            .where({user_id: user.user_id});
+
+            return { 
+                success: true, 
+                projects,
+            };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error fetching projects: ${error.message}` };
+    }
+};
 
 module.exports = {
     _addProject,

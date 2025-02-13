@@ -50,8 +50,8 @@ const deleteProjectById = async (req, res) => {
     }
 };
 
-const getCategoriesByProjectId = async (req, res) => {
-    const { projectId } = req.body;
+const getProjectsByProjectId = async (req, res) => {
+    const { userId } = req.body;
     try {
         const data = await _getProjectsByUserId(userId);
         if (data.success) {
@@ -69,5 +69,5 @@ module.exports = {
     addProject,
     updateProjectById,
     deleteProjectById,
-    getCategoriesByProjectId,
+    getProjectsByProjectId,
 };
