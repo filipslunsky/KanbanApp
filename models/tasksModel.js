@@ -74,7 +74,32 @@ const _updateTaskById = async (taskId, taskName, taskDescription, categoryId) =>
     }
 };
 
-const _deleteTaskById = async () => {};
+const _deleteTaskById = async (taskId) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const task = await trx('tasks')
+                .select('task_id')
+                .where({ task_id: taskId })
+                .first();
+
+            if (!task) {
+                return { success: false, message: 'Task not found' };
+            };
+
+            await trx('tasks')
+            .delete()
+            .where({task_id: task.task_id});
+
+            return { 
+                success: true, 
+                message: 'task successfully deleted',
+            };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error deleting task: ${error.message}` };
+    }
+};
 
 const _getTasksByProjectId = async () => {};
 
