@@ -1,7 +1,13 @@
+import Sidebar from "./Sidebar";
+import './boards.css';
+
 const Boards = () => {
     return (
         <>
-            <h2>Boards</h2>
+            <div className="boardsMainContainer">
+                <Sidebar />
+                <div className="boardsRightContainer"></div>
+            </div>
         </>
     );
 }

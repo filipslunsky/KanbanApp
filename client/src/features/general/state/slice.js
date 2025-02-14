@@ -210,5 +210,5 @@ const generalSlice = createSlice({
     
 });
 
-export const { toggleNightMode, toggleSideBar, resetAddProjectStatus, resetUpdateProjectStatus, resetDeleteProjectStatus } = generalSlice.actions;
+export const { toggleNightMode, toggleSideBar, resetAddProjectStatus, resetUpdateProjectStatus, resetDeleteProjectStatus, setStatusMessage } = generalSlice.actions;
 export default generalSlice.reducer;
