@@ -9,6 +9,7 @@ const {
 
 const categoriesRouter = Router();
 
-categoriesRouter.post('/', addCategory);
+categoriesRouter.post('/', authenticateLoginToken, addCategory);
+categoriesRouter.put('/', authenticateLoginToken, updateCategoryById);
 
 module.exports = categoriesRouter;
