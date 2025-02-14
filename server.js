@@ -18,6 +18,8 @@ app.use(express.json());
 app.use('/user', usersRouter);
 app.use('/projects', projectsRouter);
 app.use('/categories', categoriesRouter);
+app.use('/tasks', tasksRouter);
+app.use('/subtasks', subtasksRouter);
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 app.get("*", (req, res) => {
