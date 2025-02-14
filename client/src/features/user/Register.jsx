@@ -61,7 +61,7 @@ const RegisterUser = () => {
                     <p className='userStatusMessage'>
                         Congratulations, you have successfully registered, you may now proceed to log in.
                     </p>
-                    <Link className='formLink' to={'/user/login'}>Login</Link>
+                    <Link className='formLink' to={'/login'}>Login</Link>
                 </div>
                 :
                 <div className="userFormContainer">
