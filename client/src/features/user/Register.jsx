@@ -65,7 +65,6 @@ const RegisterUser = () => {
                 </div>
                 :
                 <div className="userFormContainer">
-                    <img src={logoImage} alt="logo" className="userFormLogoImage" />
                     <h2 className="userFormName">Register New User</h2>
                 <div className="userInputContainer">
                     <input

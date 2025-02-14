@@ -17,8 +17,7 @@ const Home = () => {
 
     return (
         <>  <div className="homeContainer">
-                <img src={logoImage} alt="logo" className="homeLogo" />
-                <h2 className="homeTitle">Welcome to DevLinks</h2>
+                <h2 className="homeTitle">Welcome to Kanban Task Manager</h2>
                 <p className="homeText">If you are new here, you can register and create your profile immediately, it is easy, it is fast and it is free.</p>
                 <Link to={'/user/register'} className="homeLink">Create Account</Link>
                 <p className="homeText">If you already have an account, you can log into it right away.</p>
