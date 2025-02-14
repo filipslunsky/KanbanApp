@@ -6,6 +6,7 @@ const usersRouter = require('./routes/usersRouter.js');
 const projectsRouter = require('./routes/projectsRouter.js');
 const categoriesRouter = require('./routes/categoriesRouter.js');
 const tasksRouter = require('./routes/tasksRouter.js');
+const subtasksRouter = require('./routes/subtasksRouter.js');
 
 const PORT = 3001;
 
