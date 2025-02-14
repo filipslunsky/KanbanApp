@@ -101,7 +101,42 @@ const _deleteTaskById = async (taskId) => {
     }
 };
 
-const _getTasksByProjectId = async () => {};
+const _getTasksByProjectId = async (projectId) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const project = await trx('projects')
+                .select('project_id')
+                .where({ project_id: projectId })
+                .first();
+
+            if (!project) {
+                return { success: false, message: 'Project not found' };
+            };
+
+            const tasks = await trx('tasks')
+            .select('task_id', 'task_name', 'task_description', 'category_id', 'project_id')
+            .where({project_id: project.project_id});
+
+            const tasksAndSubtasks = [];
+
+            for (let task of tasks) {
+                const subtasks = await trx('subtasks')
+                .select('subtask_id', 'subtask_name', 'is_completed', 'task_id')
+                .where({task_id: task.task_id});
+
+                tasksAndSubtasks.push({...task, subtasks});
+            };
+
+            return { 
+                success: true, 
+                tasksAndSubtasks,
+            };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error fetching categories: ${error.message}` };
+    }
+};
 
 module.exports = {
     _addTask,
