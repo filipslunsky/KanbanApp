@@ -14,7 +14,7 @@ const LoginUser = () => {
 
     useEffect(() => {
         if (loggedIn) {
-            navigate('/links');
+            navigate('/boards');
         }
     }, [loggedIn, navigate]);
 
@@ -37,7 +37,6 @@ const LoginUser = () => {
     return (
         <>
             <div className="userFormContainer">
-                <img src={logoImage} alt="logo" className="userFormLogoImage" />
                 <h2 className="userFormName">Log In</h2>
                 <div className="userInputContainer">
                     <input
@@ -63,7 +62,7 @@ const LoginUser = () => {
                 </div>
                 <div className="userStatusContainer">
                     <p className='userStatusMessage'>You don't have an account yet?</p>
-                    <Link to='/user/register' className='formLink'>Create a New Account</Link>
+                    <Link to='/register' className='formLink'>Create a New Account</Link>
                 </div>
             </div>
         </>
