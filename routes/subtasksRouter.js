@@ -8,4 +8,8 @@ const {
 
 const subtasksRouter = Router();
 
+subtasksRouter.post('/', authenticateLoginToken, addSubtask);
+subtasksRouter.put('/', authenticateLoginToken, updateSubtaskById);
+subtasksRouter.post('/delete', authenticateLoginToken, deleteSubtaskById);
+
 module.exports = subtasksRouter;

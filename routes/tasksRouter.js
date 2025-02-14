@@ -9,4 +9,9 @@ const {
 
 const tasksRouter = Router();
 
+tasksRouter.post('/', authenticateLoginToken, addTask);
+tasksRouter.put('/', authenticateLoginToken, updateTaskById);
+tasksRouter.post('/delete', authenticateLoginToken, deleteTaskById);
+tasksRouter.post('/all', authenticateLoginToken, getTasksByProjectId);
+
 module.exports = tasksRouter;
