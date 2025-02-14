@@ -21,9 +21,7 @@ const _addCategory = async (categoryName, projectId) => {
             return { 
                     success: true, 
                     message: 'Category successfully created',
-                    categoryName: newCategory[0].category_name,
-                    categoryId: newCategory[0].category_id,
-                    projectId: newCategory[0].project_id,
+                    category: newCategory[0],
                 };
             });
     } catch (error) {
@@ -44,15 +42,17 @@ const _updateCategoryById = async (categoryId, categoryName) => {
                 return { success: false, message: 'Category not found' };
             };
 
-            await trx('categories')
+            const updatedCategory = await trx('categories')
             .update({
                 category_name: categoryName
             })
-            .where({category_id: category.category_id});
+            .where({category_id: category.category_id})
+            .returning(['category_name', 'category_id', 'project_id']);
 
             return { 
                 success: true, 
                 message: 'Category successfully updated',
+                category: updatedCategory[0],
             };
         });
     } catch (error) {

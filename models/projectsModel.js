@@ -21,7 +21,7 @@ const _addProject = async (projectName, userId) => {
             return { 
                 success: true, 
                 message: 'Project successfully created',
-                project: newProject,
+                project: newProject[0],
             };
         });
     } catch (error) {
@@ -46,11 +46,13 @@ const _updateProjectById = async (projectId, projectName) => {
             .update({
                 project_name: projectName
             })
-            .where({project_id: projectId});
+            .where({project_id: projectId})
+            .returning(['project_id', 'project_name', 'user_id']);
 
             return { 
                 success: true, 
                 message: 'Project successfully updated',
+                project: updatedProject[0],
             };
         });
     } catch (error) {
