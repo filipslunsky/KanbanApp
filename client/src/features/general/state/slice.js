@@ -130,7 +130,7 @@ export const deleteProject = createAsyncThunk('general/deleteProject', async (de
 
 const generalSlice = createSlice({
     name: 'general',
-    initialState: loadUserFromLocalStorage(),
+    initialState,
     reducers: {
         toggleNightMode: (state) => {
             state.nightMode = !state.nightMode;
