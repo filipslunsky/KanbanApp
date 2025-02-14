@@ -4,6 +4,7 @@ const path = require('path');
 
 const usersRouter = require('./routes/usersRouter.js');
 const projectsRouter = require('./routes/projectsRouter.js');
+const categoriesRouter = require('./routes/categoriesRouter.js');
 
 const PORT = 3001;
 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use('/user', usersRouter);
 app.use('/projects', projectsRouter);
+app.use('/categories', categoriesRouter);
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 app.get("*", (req, res) => {
