@@ -21,9 +21,9 @@ const addTask = async (req, res) => {
 };
 
 const updateTaskById = async (req, res) => {
-    const { taskId, taskName, categoryId } = req.body;
+    const { taskId, taskName, taskDescription, categoryId } = req.body;
     try {
-        const data = await _updateTaskById(taskId, taskName, categoryId);
+        const data = await _updateTaskById(taskId, taskName, taskDescription, categoryId);
         if (data.success) {
             res.status(200).json(data);
         } else {

@@ -41,7 +41,38 @@ const _addTask = async (taskName, taskDescription, projectId, categoryId) => {
     }
 };
 
-const _updateTaskById = async () => {};
+const _updateTaskById = async (taskId, taskName, taskDescription, categoryId) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const task = await trx('tasks')
+                .select('task_id')
+                .where({ task_id: taskId })
+                .first();
+
+            if (!task) {
+                return { success: false, message: 'Task not found' };
+            };
+
+            const updatedTask = await trx('tasks')
+            .update({
+                task_name: taskName,
+                task_description: taskDescription,
+                category_id: categoryId,
+            })
+            .where({task_id: task.task_id})
+            .returning(['task_id', 'task_name', 'task_description', 'category_id', 'project_id']);
+
+            return { 
+                success: true, 
+                message: 'Task successfully updated',
+                task: updatedTask[0],
+            };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error updating task: ${error.message}` };
+    }
+};
 
 const _deleteTaskById = async () => {};
 
