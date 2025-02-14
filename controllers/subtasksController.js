@@ -5,9 +5,9 @@ const {
 } = require('../models/subtasksModel.js');
 
 const addSubtask = async (req, res) => {
-    const { subtaskName, subtaskId } = req.body;
+    const { subtaskName, taskId } = req.body;
     try {
-        const data = await _addSubtask(subtaskName, subtaskId);
+        const data = await _addSubtask(subtaskName, taskId);
         if (data.success) {
             res.status(200).json(data);
         } else {
