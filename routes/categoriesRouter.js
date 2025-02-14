@@ -7,4 +7,8 @@ const {
     getCategoriesByProjectId,
 } = require('../controllers/categoriesController.js');
 
+const categoriesRouter = Router();
+
+categoriesRouter.post('/', addCategory);
+
 module.exports = categoriesRouter;
