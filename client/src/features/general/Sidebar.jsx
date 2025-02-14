@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import Logo from "./Logo";
+import Projects from "./Projects";
 import './sidebar.css';
 
 const Sidebar = () => {
@@ -7,7 +8,7 @@ const Sidebar = () => {
         <>
             <div className="sidebarMainContainer">
                 <Logo />
-
+                <Projects />
             </div>
         </>
     );

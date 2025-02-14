@@ -11,6 +11,7 @@ const initialState = {
     deleteProjectStatus: '',
     nightMode: false,
     sideBar: true,
+    currentProjectId: null,
     statusMessage: {
         text: '',
         style: '',
@@ -154,6 +155,9 @@ const generalSlice = createSlice({
         resetDeleteProjectStatus: (state) => {
             state.deleteProjectStatus = '';
         },
+        setCurrentProjectId: (state, action) => {
+            state.currentProjectId = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -210,5 +214,13 @@ const generalSlice = createSlice({
     
 });
 
-export const { toggleNightMode, toggleSideBar, resetAddProjectStatus, resetUpdateProjectStatus, resetDeleteProjectStatus, setStatusMessage } = generalSlice.actions;
+export const {
+    toggleNightMode,
+    toggleSideBar,
+    resetAddProjectStatus,
+    resetUpdateProjectStatus,
+    resetDeleteProjectStatus,
+    setStatusMessage,
+    setCurrentProjectId,
+} = generalSlice.actions;
 export default generalSlice.reducer;
