@@ -61,7 +61,32 @@ const _updateCategoryById = async (categoryId, categoryName) => {
     }
 };
 
-const _deleteCategoryById = async () => {};
+const _deleteCategoryById = async (categoryId) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const category = await trx('categories')
+                .select('category_id')
+                .where({ category_id: categoryId })
+                .first();
+
+            if (!category) {
+                return { success: false, message: 'Category not found' };
+            };
+
+            await trx('categories')
+            .delete()
+            .where({category_id: category.category_id});
+
+            return { 
+                success: true, 
+                message: 'Category successfully deleted',
+            };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error deleting category: ${error.message}` };
+    }
+};
 
 const _getCategoriesByProjectId = async () => {};
 

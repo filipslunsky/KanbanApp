@@ -11,5 +11,6 @@ const categoriesRouter = Router();
 
 categoriesRouter.post('/', authenticateLoginToken, addCategory);
 categoriesRouter.put('/', authenticateLoginToken, updateCategoryById);
+categoriesRouter.post('/delete', authenticateLoginToken, deleteCategoryById);
 
 module.exports = categoriesRouter;
