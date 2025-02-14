@@ -5,9 +5,12 @@ import logoMobile from '../../assets/img/logo-mobile.svg';
 import './logo.css';
 
 const Logo = () => {
+    const nightMode = useSelector(state => state.general.nightMode);
+
     return (
         <>
-            <img src={logoDark} alt="light logo" />
+            <img className='logoImageLarge' src={nightMode ? logoLight : logoDark} alt="logo" />
+            <img className='logoImageSmall' src={logoMobile} alt="logo" />
         </>
     );
 }
