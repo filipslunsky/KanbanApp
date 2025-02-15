@@ -1,11 +1,13 @@
+import { useSelector } from 'react-redux';
 import './statusMessage.css';
 
-const StatusMessage = ({text, style}) => {
+const StatusMessage = () => {
+    const statusMessage = useSelector(state => state.general.statusMessage);
 
     return (
         <>
         <div className="statusMessageMainContainer">
-            <span className='statusMessageText'>{text}</span>
+            <span className='statusMessageText'>{statusMessage.text}</span>
         </div>
         </>
     );

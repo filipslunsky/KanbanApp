@@ -11,10 +11,12 @@ import {
     resetDeleteProjectStatus,
     setCurrentProjectId,
 } from './state/slice';
+import StatusMessage from './StatusMessage';
 import projectIcon from '../../assets/img/icon-board.svg';
 import './projects.css';
 
 const Projects = () => {
+    // main variables
     const dispatch = useDispatch();
 
     const projects = useSelector(state => state.general.projects);
@@ -24,6 +26,7 @@ const Projects = () => {
     const deleteProjectStatus = useSelector(state => state.general.deleteProjectStatus);
     const currentProjectId = useSelector(state => state.general.currentProjectId);
     const nightMode = useSelector(state => state.general.nightMode);
+    const statusMessage = useSelector(state => state.general.statusMessage);
 
     const [editProject, setEditProject] = useState(0);
     const [removeProject, setRemoveProject] = useState(0);
@@ -32,22 +35,60 @@ const Projects = () => {
     const projectNameRef = useRef();
     const newProjectNameRef = useRef();
 
+    // projects loading
     useEffect(() => {
         dispatch(getProjects());
     }, [dispatch, updateProjectStatus, deleteProjectStatus, addProjectStatus]);
 
     useEffect(() => {
-        console.log(projects);
         if (projects.length > 0) {
-            console.log(projects[0].project_id);
             dispatch(setCurrentProjectId(projects[0].project_id));
         };
     }, [projectsStatus]);
 
+    // status messages for add/edit/delete
+    useEffect(()=> {
+        if (addProjectStatus === 'success') {
+            dispatch(setStatusMessage({ text: "New project board created.", visible: true, style: 'success' }));
+            setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+            dispatch(resetAddProjectStatus());
+        } else if (addProjectStatus === 'failed') {
+            dispatch(setStatusMessage({ text: "Failed to create new project board. Please try again.", visible: true, style: 'failed' }));
+            setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+            dispatch(resetAddProjectStatus());
+        }
+    }, [addProjectStatus]);
+
+    useEffect(()=> {
+        if (updateProjectStatus === 'success') {
+            dispatch(setStatusMessage({ text: "Project board name changed successfully.", visible: true, style: 'success' }));
+            setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+            dispatch(resetUpdateProjectStatus());
+        } else if (updateProjectStatus === 'failed') {
+            dispatch(setStatusMessage({ text: "Failed to change project board name. Please try again.", visible: true, style: 'failed' }));
+            setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+            dispatch(resetUpdateProjectStatus());
+        }
+    }, [updateProjectStatus]);
+
+    useEffect(()=> {
+        if (deleteProjectStatus === 'success') {
+            dispatch(setStatusMessage({ text: "Project board deleted permanently.", visible: true, style: 'success' }));
+            setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+            dispatch(resetDeleteProjectStatus());
+        } else if (deleteProjectStatus === 'failed') {
+            dispatch(setStatusMessage({ text: "Failed to delete project board. Please try again.", visible: true, style: 'failed' }));
+            setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+            dispatch(resetDeleteProjectStatus());
+        }
+    }, [deleteProjectStatus]);
+
+    // choosing current project board
     const handleSelectProject = (projectId) => {
         dispatch(setCurrentProjectId(projectId));
     };
 
+    // editProject onClick funcs
     const handleEditProject = (projectId) => {
         setEditProject(projectId);
     };
@@ -63,9 +104,9 @@ const Projects = () => {
         };
         dispatch(updateProject(editItem));
         setEditProject(0);
-        dispatch(resetUpdateProjectStatus());
     };
 
+    // deleteProject onClick funcs
     const handleDeleteProject = (projectId) => {
         setRemoveProject(projectId);
     };
@@ -77,9 +118,9 @@ const Projects = () => {
     const handleOkDeleteProject = (projectId) => {
         dispatch(deleteProject({projectId}));
         setRemoveProject(0);
-        dispatch(resetDeleteProjectStatus());
     };
 
+    // addProject onClick funcs
     const handleCreateProject = () => {
         setCreateProject(true);
     };
@@ -87,20 +128,20 @@ const Projects = () => {
     const handleOkCreateProject = () => {
         dispatch(addProject({projectName: newProjectNameRef.current.value}));
         setCreateProject(false);
-        dispatch(resetAddProjectStatus());
     };
 
     const handleCancelCreateProject = () => {
         setCreateProject(false);
     };
 
+    // global status messages
     if (projectsStatus === 'loading') return (<div className="projectsMainContainer"><span className="projectsLoadingMessage">Loading...</span></div>);
 
     if (projectsStatus === 'failed') return (<div className="projectsMainContainer"><span className="projectsLoadingMessage">Failed to load projects. Please refresh the page or try again later.</span></div>);
 
     return (
         <>
-            <div className="projectsMainContainer">
+            <div className={nightMode ? "projectsMainContainer nightMode" : "projectsMainContainer"}>
                 <h2 className="projectsHeader">ALL BOARDS ({projects.length})</h2>
                 <div className="projectsItemsContainer">
                     {
