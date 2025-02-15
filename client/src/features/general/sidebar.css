@@ -5,6 +5,7 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: #f8f8f8;
+    box-shadow: 2px 0px 0px #d1d1d1;
 }
 
 .sideBarMainContainer.nightMode {
@@ -82,7 +83,7 @@
 }
 
 input:checked + .slider {
-    background-color: #A445ED;
+    background-color: #645fc6;
 }
 
 input:checked + .slider:before {

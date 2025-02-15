@@ -89,6 +89,7 @@ const Projects = () => {
     // editProject onClick funcs
     const handleEditProject = (projectId) => {
         setEditProject(projectId);
+        setCreateProject(false);
     };
 
     const handleCancelEditProject = () => {
@@ -107,6 +108,7 @@ const Projects = () => {
     // deleteProject onClick funcs
     const handleDeleteProject = (projectId) => {
         setRemoveProject(projectId);
+        setCreateProject(false);
     };
 
     const handleCancelDeleteProject = () => {
@@ -121,6 +123,8 @@ const Projects = () => {
     // addProject onClick funcs
     const handleCreateProject = () => {
         setCreateProject(true);
+        setEditProject(0);
+        setRemoveProject(0);
     };
 
     const handleOkCreateProject = () => {

@@ -6,6 +6,12 @@
     color: #828fa3;
 }
 
+.projectsLoadingMessage {
+    margin-left: 30px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .projectsHeader {
     font-size: 17px;
     font-weight: 200;
@@ -54,12 +60,21 @@
     margin-right: 7px;
 }
 
+.projectsProjectTitle:hover {
+    color: #A445ED;
+    font-weight: 700;
+}
+
 .projectsItemEditButton, .projectsItemDeleteButton {
     border: none;
     margin: 5px;
     cursor: pointer;
     background-color: inherit;
     color: #f8f8f8;
+}
+
+.nightMode .projectsItemEditButton, .nightMode .projectsItemDeleteButton {
+    color: #2c2c38;
 }
 
 .currentProject .projectsItemEditButton, .currentProject .projectsItemDeleteButton {
@@ -89,6 +104,10 @@
     outline: none;
 }
 
+.nightMode input {
+    background-color: #828fa3;
+}
+
 .projectsActiveItemConfirmButton, .projectsActiveItemCancelButton {
     border: none;
     background-color: inherit;
@@ -108,4 +127,24 @@
 
 .projectsActiveItemCancelButton:hover {
     color: #828fa3;
+}
+
+.projectsAddProjectContainer {
+    display: flex;
+    align-items: center;
+}
+
+.projectsCreateNewButton {
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+}
+
+.projectsCreateNewButton:hover {
+    color: #A445ED;
+    font-weight: 700;
+}
+
+.projectsAddProjectContainer button {
+    color: inherit;
 }
