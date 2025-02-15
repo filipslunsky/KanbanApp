@@ -102,7 +102,8 @@ const _getProjectsByUserId = async (userId) => {
 
             const projects = await trx('projects')
             .select('project_id', 'project_name', 'user_id')
-            .where({user_id: user.user_id});
+            .where({user_id: user.user_id})
+            .orderBy('project_id', 'asc');
 
             return { 
                 success: true, 

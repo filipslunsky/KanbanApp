@@ -26,13 +26,15 @@ const Projects = () => {
     const nightMode = useSelector(state => state.general.nightMode);
 
     const [editProject, setEditProject] = useState(0);
-    const [deleteProject, setDeleteProject] = useState(0);
+    const [removeProject, setRemoveProject] = useState(0);
+    const [createProject, setCreateProject] = useState(false);
 
     const projectNameRef = useRef();
+    const newProjectNameRef = useRef();
 
     useEffect(() => {
         dispatch(getProjects());
-    }, [dispatch, updateProjectStatus, deleteProjectStatus]);
+    }, [dispatch, updateProjectStatus, deleteProjectStatus, addProjectStatus]);
 
     useEffect(() => {
         console.log(projects);
@@ -65,17 +67,31 @@ const Projects = () => {
     };
 
     const handleDeleteProject = (projectId) => {
-        setDeleteProject(projectId);
+        setRemoveProject(projectId);
     };
 
     const handleCancelDeleteProject = () => {
-        setDeleteProject(0);
+        setRemoveProject(0);
     };
 
     const handleOkDeleteProject = (projectId) => {
         dispatch(deleteProject({projectId}));
-        setDeleteProject(0);
+        setRemoveProject(0);
         dispatch(resetDeleteProjectStatus());
+    };
+
+    const handleCreateProject = () => {
+        setCreateProject(true);
+    };
+
+    const handleOkCreateProject = () => {
+        dispatch(addProject({projectName: newProjectNameRef.current.value}));
+        setCreateProject(false);
+        dispatch(resetAddProjectStatus());
+    };
+
+    const handleCancelCreateProject = () => {
+        setCreateProject(false);
     };
 
     if (projectsStatus === 'loading') return (<div className="projectsMainContainer"><span className="projectsLoadingMessage">Loading...</span></div>);
@@ -96,14 +112,13 @@ const Projects = () => {
                                 onClick={() => {handleSelectProject(item.project_id)}}
                                 >
                                     <img src={projectIcon} alt="icon" className="projectsProjectIcon" />
-                                    <div className="projectsItemControlsContainer">
                                         {
                                             item.project_id == editProject
                                             ?
                                             <div className="projectsActiveItemContainer">
                                                 <input
                                                 type="text"
-                                                className="projectsNameInput"
+                                                className="projectsActiveItemNameInput"
                                                 ref={projectNameRef}
                                                 defaultValue={item.project_name}
                                                 />
@@ -112,14 +127,42 @@ const Projects = () => {
                                             </div>
                                             :
                                             <>
-                                                <button className='projectsItemButton' onClick={() => {handleEditProject(item.project_id)}}>edit</button>
                                                 <span className="projectsProjectTitle">{item.project_name}</span>
+                                                <button className='projectsItemEditButton' onClick={() => {handleEditProject(item.project_id)}}>edit</button>
+                                                {
+                                                    item.project_id == removeProject
+                                                    ?
+                                                    <div className="projectsActiveItemContainer">
+                                                        <span className="projectsActiveItemQuestion">Delete forever?</span>
+                                                        <button className="projectActiveItemCancelButton" onClick={handleCancelDeleteProject}>no</button>
+                                                        <button className="projectActiveItemConfirmButton" onClick={() => {handleOkDeleteProject(item.project_id)}}>yes</button>
+                                                    </div>
+                                                    :
+                                                    <button className="projectsItemDeleteButton" onClick={() => {handleDeleteProject(item.project_id)}}>delete</button>
+                                                }
                                             </>
                                         }
-                                    </div>
                                 </div>
                             )
                         })
+                    }
+                </div>
+                <div className="projectsAddProjectContainer">
+                    <img src={projectIcon} alt="icon" className="projectsProjectIcon" />
+                    {
+                        createProject
+                        ?
+                        <div className="projectsActiveItemContainer">
+                            <input
+                            type="text"
+                            className="projectsActiveItemNameInput"
+                            ref={newProjectNameRef}
+                            />
+                            <button className="projectsActiveItemConfirmButton" onClick={handleOkCreateProject}>ok</button>
+                            <button className="projectsActiveItemCancelButton" onClick={handleCancelCreateProject}>cancel</button>
+                        </div>
+                        :
+                        <button className="projectsCreateNewButton" onClick={handleCreateProject}> + Create New Board</button>
                     }
                 </div>
             </div>
