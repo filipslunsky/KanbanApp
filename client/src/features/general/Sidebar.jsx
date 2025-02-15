@@ -22,10 +22,12 @@ const Sidebar = () => {
 
     return (
         <>
-            <div className={nightMode ? "sidebarMainContainer nightMode" : "sidebarMainContainer"}>
-                <Logo />
-                <Projects />
-                <div className="sidebarControlsContainer">
+            <div className={nightMode ? "sideBarMainContainer nightMode" : "sideBarMainContainer"}>
+                <div className="sideBarTopContainer">
+                    <Logo />
+                    <Projects />
+                </div>
+                <div className="sideBarControlsContainer">
                     <div className="nightModeSwitchContainer">
                         <img src={lightThemeIcon} alt="icon" className="nightModeIcon" />
                         <label className="switch">
