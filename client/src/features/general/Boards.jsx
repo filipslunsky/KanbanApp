@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import Sidebar from "./Sidebar";
+import Navbar from "./Navbar";
 import './boards.css';
 
 const Boards = () => {
@@ -10,7 +11,9 @@ const Boards = () => {
         <>
             <div className={nightMode ? "boardsMainContainer nightMode" : "boardsMainContainer"}>
                 {sideBar && <Sidebar />}
-                <div className="boardsRightContainer"></div>
+                <div className="boardsRightContainer">
+                    <Navbar />
+                </div>
             </div>
         </>
     );

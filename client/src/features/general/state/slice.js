@@ -11,6 +11,7 @@ const initialState = {
     deleteProjectStatus: '',
     nightMode: false,
     sideBar: true,
+    newTaskWindow: false,
     currentProjectId: null,
     statusMessage: {
         text: '',
@@ -139,6 +140,9 @@ const generalSlice = createSlice({
         toggleSideBar: (state) => {
             state.sideBar = !state.sideBar;
         },
+        toggleNewTaskWindow: (state) => {
+            state.newTaskWindow = !state.newTaskWindow;
+        },
         setStatusMessage: (state, action) => {
             state.statusMessage = {
                 text: action.payload.text,
@@ -217,6 +221,7 @@ const generalSlice = createSlice({
 export const {
     toggleNightMode,
     toggleSideBar,
+    toggleNewTaskWindow,
     resetAddProjectStatus,
     resetUpdateProjectStatus,
     resetDeleteProjectStatus,
