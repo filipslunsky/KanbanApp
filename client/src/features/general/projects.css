@@ -1,0 +1,111 @@
+.projectsMainContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    color: #828fa3;
+}
+
+.projectsHeader {
+    font-size: 17px;
+    font-weight: 200;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.projectsItemsContainer {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    max-height: 85%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.projectsItemsContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.projectsItemContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.projectsItemContainer.currentProject {
+    background-color: #645fc6;
+    border-radius: 0 25px 25px 0;
+    color: #f8f8f8;
+}
+
+.projectsProjectIcon {
+    margin: 0 7px;
+}
+
+.projectsProjectTitle {
+    margin-right: 7px;
+}
+
+.projectsItemEditButton, .projectsItemDeleteButton {
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+    background-color: inherit;
+    color: #f8f8f8;
+}
+
+.currentProject .projectsItemEditButton, .currentProject .projectsItemDeleteButton {
+    color: #645fc6;
+}
+
+.projectsItemEditButton:hover, .projectsItemDeleteButton:hover {
+    color: inherit;
+}
+
+.projectsActiveItemContainer {
+    height: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.projectsActiveItemContainer input {
+    height: 25px;
+    width: 110px;
+    padding-left: 5px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.projectsActiveItemContainer input:focus {
+    outline: none;
+}
+
+.projectsActiveItemConfirmButton, .projectsActiveItemCancelButton {
+    border: none;
+    background-color: inherit;
+    margin-right: 10px;
+    color: #f8f8f8;
+    cursor: pointer;
+}
+
+.projectsActiveItemQuestion {
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.projectsActiveItemConfirmButton:hover {
+    color: black;
+}
+
+.projectsActiveItemCancelButton:hover {
+    color: #828fa3;
+}

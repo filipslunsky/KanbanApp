@@ -172,9 +172,9 @@ const Projects = () => {
                                                     item.project_id == removeProject
                                                     ?
                                                     <div className="projectsActiveItemContainer">
-                                                        <span className="projectsActiveItemQuestion">Delete forever?</span>
-                                                        <button className="projectActiveItemCancelButton" onClick={handleCancelDeleteProject}>no</button>
-                                                        <button className="projectActiveItemConfirmButton" onClick={() => {handleOkDeleteProject(item.project_id)}}>yes</button>
+                                                        <span className="projectsActiveItemQuestion">Delete?</span>
+                                                        <button className="projectsActiveItemCancelButton" onClick={handleCancelDeleteProject}>no</button>
+                                                        <button className="projectsActiveItemConfirmButton" onClick={() => {handleOkDeleteProject(item.project_id)}}>yes</button>
                                                     </div>
                                                     :
                                                     <button className="projectsItemDeleteButton" onClick={() => {handleDeleteProject(item.project_id)}}>delete</button>

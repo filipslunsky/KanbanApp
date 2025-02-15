@@ -11,6 +11,10 @@
     background-color: #2c2c38;
 }
 
+.sideBarTopContainer {
+    height: 75%;
+}
+
 .sideBarControlsContainer {
     margin: 30px 0 30px 20px;
     height: 80px;
