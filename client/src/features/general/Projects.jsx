@@ -11,7 +11,6 @@ import {
     resetDeleteProjectStatus,
     setCurrentProjectId,
 } from './state/slice';
-import StatusMessage from './StatusMessage';
 import projectIcon from '../../assets/img/icon-board.svg';
 import './projects.css';
 
@@ -26,7 +25,6 @@ const Projects = () => {
     const deleteProjectStatus = useSelector(state => state.general.deleteProjectStatus);
     const currentProjectId = useSelector(state => state.general.currentProjectId);
     const nightMode = useSelector(state => state.general.nightMode);
-    const statusMessage = useSelector(state => state.general.statusMessage);
 
     const [editProject, setEditProject] = useState(0);
     const [removeProject, setRemoveProject] = useState(0);
