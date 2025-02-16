@@ -49,7 +49,30 @@ const Category = ({categoryId, categoryName}) => {
         setDeleteCategoryClicked(false);
     };
 
-    // status messages for 
+    // status messages for edit/delete category (column)
+    useEffect(()=> {
+            if (updateCategoryStatus === 'success') {
+                dispatch(setStatusMessage({ text: "New project board created.", visible: true, style: 'success' }));
+                setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+                dispatch(resetUpdateCategoryStatus());
+            } else if (updateCategoryStatus === 'failed') {
+                dispatch(setStatusMessage({ text: "Failed to create new project board. Please try again.", visible: true, style: 'failed' }));
+                setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+                dispatch(resetUpdateCategoryStatus());
+            }
+        }, [updateCategoryStatus]);
+    
+        useEffect(()=> {
+            if (deleteCategoryStatus === 'success') {
+                dispatch(setStatusMessage({ text: "New project board created.", visible: true, style: 'success' }));
+                setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+                dispatch(resetDeleteCategoryStatus());
+            } else if (deleteCategoryStatus === 'failed') {
+                dispatch(setStatusMessage({ text: "Failed to create new project board. Please try again.", visible: true, style: 'failed' }));
+                setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+                dispatch(resetDeleteCategoryStatus());
+            }
+        }, [deleteCategoryStatus]);
 
     return (
         <>
