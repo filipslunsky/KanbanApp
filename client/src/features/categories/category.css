@@ -5,6 +5,7 @@
     width: 90%;
     justify-content: space-around;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .categoryTitle {
@@ -53,6 +54,10 @@
 
 .categoryActiveContainer input:focus {
     outline: none;
+}
+
+.categoryConfirmQuestion {
+    color: #828fa3;
 }
 
 .categoryConfirmButton, .categoryCancelButton {

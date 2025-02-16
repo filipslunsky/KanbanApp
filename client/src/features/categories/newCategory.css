@@ -1,0 +1,64 @@
+.newCategoryMainCotnainer {
+    flex: 0 0 200px;
+    height: 99%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nightMode.newCategoryMainCotnainer {
+    background-color: #2c2c38;
+}
+
+.newCategoryAddButton {
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    font-size: 16px;
+    color: #828fa3;
+}
+
+.newCategoryAddButton:hover {
+    color: #A445ED;
+}
+
+.newCategoryActiveContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.newCategoryNameInput {
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #828fa3;
+    height: 20px;
+    padding-left: 5px;
+}
+
+.newCategoryNameInput:focus {
+    outline: none;
+}
+
+.newCategoryConfirmButton, .newCategoryCancelButton {
+    border: none;
+    height: 20px;
+    color: #828fa3;
+    background-color: inherit;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 5px;
+}
+
+.newCategoryConfirmButton:hover {
+    color: #A445ED;
+}
+
+.newCategoryCancelButton:hover {
+    color: #645fc6;
+}

@@ -10,6 +10,7 @@ const NewCategory = () => {
 
     const currentProjectId = useSelector(state => state.general.currentProjectId);
     const addCategoryStatus = useSelector(state => state.categories.addCategoryStatus);
+    const nightMode = useSelector(state => state.general.nightMode);
 
     const newCategoryNameRef = useRef();
 
@@ -48,7 +49,7 @@ const NewCategory = () => {
 
     return (
         <>
-            <div className="newCategoryMainCotnainer">
+            <div className={nightMode ? "newCategoryMainCotnainer nightMode" : "newCategoryMainCotnainer"}>
                 {
                     newCategoryClicked
                     ?
@@ -59,7 +60,7 @@ const NewCategory = () => {
                         className="newCategoryNameInput"
                         />
                         <button className="newCategoryConfirmButton" onClick={handleAddNewClickOk}>Save</button>
-                        <button className="newCategoryConfirmButton" onClick={handleAddNewClickCancel}>Cancel</button>
+                        <button className="newCategoryCancelButton" onClick={handleAddNewClickCancel}>Cancel</button>
                     </div>
                     :
                     <button className="newCategoryAddButton" onClick={handleAddNewClick}>+ New Column</button>
