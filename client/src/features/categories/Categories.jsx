@@ -14,13 +14,14 @@ const Categories = () => {
     const categoriesStatus = useSelector(state => state.categories.updateCategoryStatus);
     const updateCategoryStatus = useSelector(state => state.categories.updateCategoryStatus);
     const deleteCategoryStatus = useSelector(state => state.categories.deleteCategoryStatus);
+    const addCategoryStatus = useSelector(state => state.categories.addCategoryStatus);
     console.log(currentProjectId);
 
     useEffect(() => {
         if (currentProjectId != null) {
             dispatch(getCategories({projectId: currentProjectId}));
         };
-    }, [currentProjectId, dispatch, updateCategoryStatus, deleteCategoryStatus]);
+    }, [currentProjectId, dispatch, updateCategoryStatus, deleteCategoryStatus, addCategoryStatus]);
 
     useEffect(() => {
         console.log(categories);
