@@ -62,7 +62,6 @@
 
 .projectsProjectTitle:hover {
     color: #A445ED;
-    font-weight: 700;
 }
 
 .projectsItemEditButton, .projectsItemDeleteButton {
@@ -147,4 +146,36 @@
 
 .projectsAddProjectContainer button {
     color: inherit;
+}
+
+/* @media (min-width: 568px) and (max-width: 1023px) {
+
+} */
+
+@media (max-width: 567px) {
+    .projectsItemContainer {
+        height: 50px;
+        font-size: 12px;
+    }
+    
+    .projectsProjectIcon {
+        margin: 0 4px;
+        height: 13px;
+    }
+    
+    .projectsProjectTitle {
+        margin-right: 5px;
+    }
+    
+    .projectsItemEditButton, .projectsItemDeleteButton {
+        font-size: 12px;
+        margin-right: 5px;
+        color: #828fa3;
+    }
+
+    .currentProject .projectsItemEditButton, .currentProject .projectsItemDeleteButton {
+        color: #828fa3;
+    }
+
+
 }
