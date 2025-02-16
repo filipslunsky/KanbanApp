@@ -44,7 +44,7 @@ export const getCategories = createAsyncThunk('categories/getcategories', async 
     }
 });
 
-export const addCategory = createAsyncThunk('general/addCategory', async (addItem, { rejectWithValue }) => {
+export const addCategory = createAsyncThunk('categories/addCategory', async (addItem, { rejectWithValue }) => {
     try {
         const user = JSON.parse(localStorage.getItem('user'));
         const headers = getHeaders();
@@ -70,7 +70,7 @@ export const addCategory = createAsyncThunk('general/addCategory', async (addIte
     }
 });
 
-export const updateCategory = createAsyncThunk('general/updateCategory', async (updateItem, { rejectWithValue }) => {
+export const updateCategory = createAsyncThunk('categories/updateCategory', async (updateItem, { rejectWithValue }) => {
     try {
         const user = JSON.parse(localStorage.getItem('user'));
         const headers = getHeaders();
@@ -96,7 +96,7 @@ export const updateCategory = createAsyncThunk('general/updateCategory', async (
     }
 });
 
-export const deleteCategory = createAsyncThunk('general/deleteCategory', async (deleteItem, { rejectWithValue }) => {
+export const deleteCategory = createAsyncThunk('categories/deleteCategory', async (deleteItem, { rejectWithValue }) => {
     try {
         const user = JSON.parse(localStorage.getItem('user'));
         const headers = getHeaders();
@@ -126,13 +126,13 @@ const categoriesSlice = createSlice({
     initialState,
     reducers: {
         resetAddCategoryStatus: (state) => {
-            state.addProjectStatus = '';
+            state.addCategoryStatus = '';
         },
         resetUpdateCategoryStatus: (state) => {
-            state.updateProjectStatus = '';
+            state.updateCategoryStatus = '';
         },
         resetDeleteCategoryStatus: (state) => {
-            state.deleteProjectStatus = '';
+            state.deleteCategoryStatus = '';
         },
     },
     extraReducers: (builder) => {

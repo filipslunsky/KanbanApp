@@ -8,13 +8,13 @@
     overflow-x: auto;
     white-space: nowrap;
     gap: 10px;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    /* -ms-overflow-style: none;
+    scrollbar-width: none; */
 }
 
-.categoriesMainContainer::-webkit-scrollbar {
+/* .categoriesMainContainer::-webkit-scrollbar {
     display: none;
-}
+} */
 
 .categoriesMainContainer.nightMode {
     background-color: #21212d;
