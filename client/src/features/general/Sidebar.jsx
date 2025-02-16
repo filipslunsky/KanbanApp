@@ -34,6 +34,7 @@ const Sidebar = () => {
                             <input
                                 type="checkbox"
                                 onChange={handleToggleNightMode}
+                                defaultChecked={nightMode ? true : false}
                             />
                             <span className="slider"></span>
                         </label>
