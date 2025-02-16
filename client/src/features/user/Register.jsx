@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser, resetRegisterStatus } from './state/slice.js';
+import './loginRegister.css';
 
 const RegisterUser = () => {
     const dispatch = useDispatch();
