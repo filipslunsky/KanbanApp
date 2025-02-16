@@ -107,7 +107,7 @@ input:checked + .slider:before {
     margin-right: 10px;
 }
 
-@media (min-width: 568px) and (max-width: 1023px) {
+/* @media (min-width: 568px) and (max-width: 1023px) {
     .sideBarMainContainer {
         width: 250px;
     }
@@ -117,4 +117,4 @@ input:checked + .slider:before {
     .sideBarMainContainer {
         width: 230px;
     }
-}
+} */

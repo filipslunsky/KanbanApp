@@ -102,7 +102,8 @@ const _getCategoriesByProjectId = async (projectId) => {
 
             const categories = await trx('categories')
             .select('category_id', 'category_name', 'project_id')
-            .where({project_id: project.project_id});
+            .where({project_id: project.project_id})
+            .orderBy('category_id', 'asc');
 
             return { 
                 success: true, 

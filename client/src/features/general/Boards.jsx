@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
+import Categories from "../categories/Categories";
 import './boards.css';
 
 const Boards = () => {
@@ -13,6 +14,7 @@ const Boards = () => {
                 {sideBar && <Sidebar />}
                 <div className="boardsRightContainer">
                     <Navbar />
+                    <Categories />
                 </div>
             </div>
         </>
