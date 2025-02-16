@@ -208,65 +208,110 @@ const tasksSlice = createSlice({
     name: 'tasks',
     initialState,
     reducers: {
-        resetAddCategoryStatus: (state) => {
-            state.addProjectStatus = '';
+        resetAddTaskStatus: (state) => {
+            state.addTaskStatus = '';
         },
-        resetUpdateCategoryStatus: (state) => {
-            state.updateProjectStatus = '';
+        resetUpdateTaskStatus: (state) => {
+            state.updateTaskStatus = '';
         },
-        resetDeleteCategoryStatus: (state) => {
-            state.deleteProjectStatus = '';
+        resetDeleteTaskStatus: (state) => {
+            state.deleteTaskStatus = '';
+        },
+        resetAddSubtaskStatus: (state) => {
+            state.addSubtaskStatus = '';
+        },
+        resetUpdateSubtaskStatus: (state) => {
+            state.updateSubtaskStatus = '';
+        },
+        resetDeleteSubtaskStatus: (state) => {
+            state.deleteSubtaskStatus = '';
         },
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getCategories.pending, (state) => {
-                state.categoriesStatus = 'loading';
+            .addCase(getTasks.pending, (state) => {
+                state.tasksStatus = 'loading';
                 state.error = null;
             })
-            .addCase(getCategories.rejected, (state, action) => {
-                state.categoriesStatus = 'failed';
+            .addCase(getTasks.rejected, (state, action) => {
+                state.tasksStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(getCategories.fulfilled, (state, action) => {
-                state.categoriesStatus = 'success';
-                state.categories = action.payload;
+            .addCase(getTasks.fulfilled, (state, action) => {
+                state.tasksStatus = 'success';
+                state.tasks = action.payload;
                 state.error = null;
             })
-            .addCase(addCategory.pending, (state) => {
-                state.addCategoryStatus = 'loading';
+            .addCase(addTask.pending, (state) => {
+                state.addTaskStatus = 'loading';
                 state.error = null;
             })
-            .addCase(addCategory.rejected, (state, action) => {
-                state.addCategoryStatus = 'failed';
+            .addCase(addTask.rejected, (state, action) => {
+                state.addTaskStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(addCategory.fulfilled, (state) => {
-                state.addCategoryStatus = 'success';
+            .addCase(addTask.fulfilled, (state) => {
+                state.addTaskStatus = 'success';
                 state.error = null;
             })
-            .addCase(updateCategory.pending, (state) => {
-                state.updateCategoryStatus = 'loading';
+            .addCase(updateTask.pending, (state) => {
+                state.updateTaskStatus = 'loading';
                 state.error = null;
             })
-            .addCase(updateCategory.rejected, (state, action) => {
-                state.updateCategoryStatus = 'failed';
+            .addCase(updateTask.rejected, (state, action) => {
+                state.updateTaskStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(updateCategory.fulfilled, (state) => {
-                state.updateCategoryStatus = 'success';
+            .addCase(updateTask.fulfilled, (state) => {
+                state.updateTaskStatus = 'success';
                 state.error = null;
             })
-            .addCase(deleteCategory.pending, (state) => {
-                state.deleteCategoryStatus = 'loading';
+            .addCase(deleteTask.pending, (state) => {
+                state.deleteTaskStatus = 'loading';
                 state.error = null;
             })
-            .addCase(deleteCategory.rejected, (state, action) => {
-                state.deleteCategoryStatus = 'failed';
+            .addCase(deleteTask.rejected, (state, action) => {
+                state.deleteTaskStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(deleteCategory.fulfilled, (state) => {
-                state.deleteCategoryStatus = 'success';
+            .addCase(deleteTask.fulfilled, (state) => {
+                state.deleteTaskStatus = 'success';
+                state.error = null;
+            })
+            .addCase(addSubtask.pending, (state) => {
+                state.addSubtaskStatus = 'loading';
+                state.error = null;
+            })
+            .addCase(addSubtask.rejected, (state, action) => {
+                state.addSubtaskStatus = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(addSubtask.fulfilled, (state) => {
+                state.addSubtaskStatus = 'success';
+                state.error = null;
+            })
+            .addCase(updateSubtask.pending, (state) => {
+                state.updateSubtaskStatus = 'loading';
+                state.error = null;
+            })
+            .addCase(updateSubtask.rejected, (state, action) => {
+                state.updateSubtaskStatus = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(updateSubtask.fulfilled, (state) => {
+                state.updateSubtaskStatus = 'success';
+                state.error = null;
+            })
+            .addCase(deleteSubtask.pending, (state) => {
+                state.deleteSubtaskStatus = 'loading';
+                state.error = null;
+            })
+            .addCase(deleteSubtask.rejected, (state, action) => {
+                state.deleteSubtaskStatus = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(deleteSubtask.fulfilled, (state) => {
+                state.deleteSubtaskStatus = 'success';
                 state.error = null;
             })
     },
@@ -274,6 +319,11 @@ const tasksSlice = createSlice({
 });
 
 export const {
-    
+    resetAddTaskStatus,
+    resetUpdateTaskStatus,
+    resetDeleteTaskStatus,
+    resetAddSubtaskStatus,
+    resetUpdateSubtaskStatus,
+    resetDeleteSubtaskStatus,
 } = tasksSlice.actions;
 export default tasksSlice.reducer;
