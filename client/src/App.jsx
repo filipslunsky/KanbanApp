@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import ProtectedRoute from './features/general/ProtectedRoute';
 import Home from './features/general/Home';
 import Register from './features/user/Register';
@@ -8,8 +7,6 @@ import Boards from './features/general/Boards';
 import './App.css';
 
 function App() {
-  const loggedIn = useSelector(state => state.user.loggedIn);
-
   return (
     <>
       <BrowserRouter>
