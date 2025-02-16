@@ -10,6 +10,7 @@ const Category = ({categoryId, categoryName}) => {
 
     const updateCategoryStatus = useSelector(state => state.categories.updateCategoryStatus);
     const deleteCategoryStatus = useSelector(state => state.categories.deleteCategoryStatus);
+    const nightMode = useSelector(state => state.general.nightMode);
 
     const categoryNameRef = useRef();
 
@@ -76,35 +77,37 @@ const Category = ({categoryId, categoryName}) => {
 
     return (
         <>
-            <div className="categoryTitleContainer">
-                <h2 className="categoryTitle">{categoryName}</h2>
-                {
-                    updateCategoryClicked
-                    ?
-                    <div className="categoryActiveContainer">
-                        <input
-                        type="text"
-                        defaultValue={categoryName}
-                        ref={categoryNameRef}
-                        className='categoryNameEditInput'
-                        />
-                        <button className="categoryConfirmButton" onClick={handleUdpateClickOk}>save</button>
-                        <button className="categoryCancelButton" onClick={handleUpdateClickCancel}>cancel</button>
-                    </div>
-                    :
-                    <button className="categoryHeaderButton" onClick={handleUpdateClick}>edit</button>
-                }
-                {
-                    deleteCategoryClicked
-                    ?
-                    <div className="categoryActiveContainer">
-                        <span className="categoryConfirmQuestion">Delete this column?</span>
-                        <button className="categoryCancelButton" onClick={handleDeleteClickCancel}>cancel</button>
-                        <button className="categoryConfirmButton" onClick={handleDeleteClickOk}>save</button>
-                    </div>
-                    :
-                    <button className="categoryHeaderButton" onClick={handleDeleteClick}>delete</button>
-                }
+            <div className={nightMode ? "categoryTitleContainer nightMode" : "categoryTitleContainer"}>
+                <h2 className="categoryTitle">{categoryName} (0)</h2>
+                <div className="categoryControlsContainer">
+                    {
+                        updateCategoryClicked
+                        ?
+                        <div className="categoryActiveContainer">
+                            <input
+                            type="text"
+                            defaultValue={categoryName}
+                            ref={categoryNameRef}
+                            className='categoryNameEditInput'
+                            />
+                            <button className="categoryConfirmButton" onClick={handleUdpateClickOk}>save</button>
+                            <button className="categoryCancelButton" onClick={handleUpdateClickCancel}>cancel</button>
+                        </div>
+                        :
+                        <button className="categoryHeaderButton" onClick={handleUpdateClick}>edit</button>
+                    }
+                    {
+                        deleteCategoryClicked
+                        ?
+                        <div className="categoryActiveContainer">
+                            <span className="categoryConfirmQuestion">Delete this column?</span>
+                            <button className="categoryCancelButton" onClick={handleDeleteClickCancel}>no</button>
+                            <button className="categoryConfirmButton" onClick={handleDeleteClickOk}>yes</button>
+                        </div>
+                        :
+                        <button className="categoryHeaderButton" onClick={handleDeleteClick}>delete</button>
+                    }
+                </div>
             </div>
             <div className="categoryTasksContainer">
                 

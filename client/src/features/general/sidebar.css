@@ -1,6 +1,6 @@
 .sideBarMainContainer {
     width: 270px;
-    height: 100vh;
+    height: 99vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

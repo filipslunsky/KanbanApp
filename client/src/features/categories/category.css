@@ -1,0 +1,75 @@
+.categoryTitleContainer {
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    width: 90%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.categoryTitle {
+    color: #828fa3;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.categoryControlsContainer {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.categoryHeaderButton {
+    border: none;
+    background-color: inherit;
+    margin: 0 5px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.nightMode .categoryHeaderButton {
+    color: #21212d;
+}
+
+.categoryHeaderButton:hover {
+    color: #828fa3;
+}
+
+.categoryActiveContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.categoryActiveContainer input {
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 5px;
+    background-color: #828fa3;
+}
+
+.categoryActiveContainer input:focus {
+    outline: none;
+}
+
+.categoryConfirmButton, .categoryCancelButton {
+    border: none;
+    background-color: inherit;
+    color: #828fa3;
+    cursor: pointer;
+}
+
+.categoryConfirmButton:hover {
+    color: #A445ED;
+}
+
+.nightMode .categoryCancelButton:hover {
+    color: #f8f8f8;
+}
+
+.categoryCancelButton:hover {
+    color: black;
+}
