@@ -9,14 +9,18 @@ const TaskItem = ({taskItem}) => {
 
     return (
         <>
-            <img src={verticalBurgerIcon} alt="icon" className="dragNDropIcon" />
-            <span className="taskItemName">{taskItem.task_name}</span>
-            {
-                subtasksTotal > 0 && <span className="taskItemSubtasksStatus">
-                    {subtasksFinished} of {subtasksTotal}
-                    {subtasksTotal === 1 ? ' task' : ' tasks'}
-                    </span>
-            }
+            <div className="taskItemLeftContainer">
+                <img src={verticalBurgerIcon} alt="icon" className="dragNDropIcon" />
+            </div>
+            <div className="taskItemRightContainer">
+                <span className="taskItemName">{taskItem.task_name}</span>
+                {
+                    subtasksTotal > 0 && <span className="taskItemSubtasksStatus">
+                        {subtasksFinished} of {subtasksTotal}
+                        {subtasksTotal === 1 ? ' task' : ' tasks'}
+                        </span>
+                }
+            </div>
         </>
     );
 }

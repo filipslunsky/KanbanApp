@@ -1,5 +1,49 @@
 .taskItemContainer {
-    width: 300px;
-    height: 150px;
-    border: 1px solid black;
+    width: 90%;
+    min-height: 80px;
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 10px;
+}
+
+.taskItemContainer.nightMode {
+    background-color: #2c2c38;
+}
+
+.taskItemLeftContainer {
+    width: 50px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+}
+
+.taskItemRightContainer {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 90%;
+    justify-content: center;
+    align-items: flex-start;
+    cursor: pointer;
+    background-color: inherit;
+}
+
+.nightMode .taskItemName {
+    color: white;
+}
+
+.taskItemName {
+    font-weight: 600;
+    font-size: 19px;
+}
+
+.taskItemSubtasksStatus {
+    color: #828fa3;
+    font-size: 15px;
+    margin-top: 10px;
 }

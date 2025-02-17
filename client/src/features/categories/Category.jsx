@@ -119,7 +119,7 @@ const Category = ({categoryId, categoryName}) => {
                 {
                     filteredTasks.map(item => {
                         return (
-                            <div className="taskItemContainer" key={item.task_id}>
+                            <div className={nightMode ? "taskItemContainer nightMode" : "taskItemContainer"} key={item.task_id}>
                                 <TaskItem taskItem={item} />
                             </div>
                         )
