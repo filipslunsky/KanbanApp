@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateCategory, deleteCategory, resetUpdateCategoryStatus, resetDeleteCategoryStatus } from './state/slice';
 import { setStatusMessage } from '../general/state/slice';
+import TaskItem from '../tasks/TaskItem';
 import './category.css';
 
 const Category = ({categoryId, categoryName}) => {
@@ -109,8 +110,9 @@ const Category = ({categoryId, categoryName}) => {
                     }
                 </div>
             </div>
-            <div className="categoryTasksContainer">
+            <div className="categoryTaskItemsContainer">
                 
+                <TaskItem taskItem='bs' />
             </div>
         </>
     );
