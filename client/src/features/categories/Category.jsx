@@ -12,6 +12,8 @@ const Category = ({categoryId, categoryName}) => {
     const updateCategoryStatus = useSelector(state => state.categories.updateCategoryStatus);
     const deleteCategoryStatus = useSelector(state => state.categories.deleteCategoryStatus);
     const nightMode = useSelector(state => state.general.nightMode);
+    const tasks = useSelector(state => state.tasks.tasks);
+    const tasksStatus = useSelector(state => state.tasks.tasksStatus);
 
     const categoryNameRef = useRef();
 
@@ -76,6 +78,9 @@ const Category = ({categoryId, categoryName}) => {
             }
         }, [deleteCategoryStatus]);
 
+        // tasks filtering
+        const filteredTasks = tasksStatus === 'success' ? tasks.filter(item => item.category_id === categoryId) : [];
+
     return (
         <>
             <div className={nightMode ? "categoryTitleContainer nightMode" : "categoryTitleContainer"}>
@@ -111,8 +116,15 @@ const Category = ({categoryId, categoryName}) => {
                 </div>
             </div>
             <div className="categoryTaskItemsContainer">
-                
-                <TaskItem taskItem='bs' />
+                {
+                    filteredTasks.map(item => {
+                        return (
+                            <div className="taskItemContainer" key={item.task_id}>
+                                <TaskItem taskItem={item} />
+                            </div>
+                        )
+                    })
+                }
             </div>
         </>
     );
