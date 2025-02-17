@@ -4,9 +4,11 @@
     background-color: white;
     border-radius: 15px;
     display: flex;
+    justify-content: center;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 10px;
+    box-shadow: 1px 1px 1px gray;
 }
 
 .taskItemContainer.nightMode {
@@ -25,7 +27,7 @@
 .taskItemRightContainer {
     display: flex;
     flex-direction: column;
-    width: 250px;
+    width: 230px;
     height: 90%;
     justify-content: center;
     align-items: flex-start;
