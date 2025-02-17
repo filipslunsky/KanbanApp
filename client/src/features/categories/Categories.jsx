@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCategories } from './state/slice';
+import { getTasks } from '../tasks/state/slice';
 import Category from './Category';
 import NewCategory from './NewCategory';
 import './categories.css';
 
 const Categories = () => {
+    // global variables and states
     const dispatch = useDispatch();
 
     const nightMode = useSelector(state => state.general.nightMode);
@@ -15,15 +17,26 @@ const Categories = () => {
     const updateCategoryStatus = useSelector(state => state.categories.updateCategoryStatus);
     const deleteCategoryStatus = useSelector(state => state.categories.deleteCategoryStatus);
     const addCategoryStatus = useSelector(state => state.categories.addCategoryStatus);
+    const tasks = useSelector(state => state.tasks.tasks);
+    const tasksStatus = useSelector(state => state.tasks.tasksStatus);
 
+    // getting categories after loading and changing their items
     useEffect(() => {
         if (currentProjectId != null) {
             dispatch(getCategories({projectId: currentProjectId}));
         };
-    }, [currentProjectId, dispatch, updateCategoryStatus, deleteCategoryStatus, addCategoryStatus]);
+    }, [dispatch, currentProjectId, updateCategoryStatus, deleteCategoryStatus, addCategoryStatus]);
+
+    // getting tasks after loading and changing their items
+    useEffect(() => {
+        if (currentProjectId !== null) {
+            dispatch(getTasks({projectId: currentProjectId}));
+        };
+        }, [dispatch, currentProjectId]);
 
     useEffect(() => {
-        }, [categories]);
+        console.log(tasks);
+    }, [tasks]);
 
     if (categoriesStatus === 'loading') {
         return (<div className={nightMode ? "categoriesMainContainer nightMode" : "categoriesMainContainer"}>Loading...</div>)

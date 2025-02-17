@@ -41,7 +41,7 @@ export const getTasks = createAsyncThunk('tasks/getTasks', async (projectItem, {
             { headers }
         );
         
-        return response.data.tasks;
+        return response.data.tasksAndSubtasks;
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
     }
