@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleEditTaskWindow, setStatusMessage } from '../general/state/slice.js';
 import { updateTask, deleteTask, addSubtask, updateSubtask, deleteSubtask, resetUpdateTaskStatus, resetDeleteTaskStatus } from './state/slice.js';
 import crossIcon from '../../assets/img/icon-cross.svg';
-import verticalBurgerIcon from '../../assets/img/icon-vertical-ellipsis.svg';
 import './taskDetail.css';
 
 const TaskDetail = () => {
@@ -18,7 +17,11 @@ const TaskDetail = () => {
     // const updateSubtaskStatus = useSelector(state => state.tasks.updateSubtaskStatus);
     // const deleteSubtaskStatus = useSelector(state => state.tasks.deleteSubtaskStatus);
 
-    const [burgerClicked, setBurgerClicked] = useState(false);
+    const [editTaskName, setEditTaskName] = useState(false);
+    const [editTaskDescription, setEditTaskDescription] = useState(false);
+    const [taskDelete, setTaskDelete] = useState(false);
+
+    const tasksCompleted = currentTask.subtasks.filter(item => item.is_completed === true);
 
     console.log(currentTask);
 
@@ -27,6 +30,33 @@ const TaskDetail = () => {
         dispatch(toggleEditTaskWindow());
     };
 
+    const handleTaskNameClick = () => {
+        setEditTaskName(true);
+        setEditTaskDescription(false);
+        setTaskDelete(false);
+    };
+
+    const handleTaskDescriptionClick = () => {
+        setEditTaskDescription(true);
+        setEditTaskName(false);
+        setTaskDelete(false);
+    };
+
+    const handleDeleteClick = () => {
+        setTaskDelete(true);
+        setEditTaskName(false);
+        setEditTaskDescription(false);
+    };
+
+    const handleDeleteClickCancel = () => {
+        setTaskDelete(false);
+    };
+
+    const handleDeleteClickConfirm = () => {
+        dispatch(deleteTask({taskId: currentTask.task_id}));
+        dispatch(toggleEditTaskWindow());
+    };
+    
         // subtasks button click handlers
     
     // status message for updateTask
@@ -59,9 +89,43 @@ const TaskDetail = () => {
             <div className="taskDetailOuterContainer">
                 <div className={nightMode ? "taskDetailMainContainer nightMode" : "taskDetailMainContainer"}>
                     <div className="taskDetailHeaderContainer">
-                        <h2 className="taskDetailHeader">{currentTask.task_name}</h2>
-                        <button className="taskDetailCancelButton"><img src={verticalBurgerIcon} alt="icon" className="taskDetailVerticalBurgerIcon" /></button>
+                        {
+                            editTaskName
+                            ?
+                            ''
+                            :
+                            <h2 className="taskDetailHeader" onClick={handleTaskNameClick}>{currentTask.task_name}</h2>
+                        }
                         <button className="taskDetailCancelButton" onClick={handleClickClose}><img src={crossIcon} alt="icon" className="taskDetailCrossIcon" /></button>
+                    </div>
+                    <div className="taskDetailTaskDescriptionContainer">
+                        {
+                            editTaskDescription
+                            ?
+                            ''
+                            :
+                            <span className="taskDetailTaskDescriptionText" onClick={handleTaskDescriptionClick}>
+                                {currentTask.task_description}
+                            </span>
+                        }
+                    </div>
+                    <div className="taskDetailSubtasksContainer">
+                        <span className="taskDetailLable">Subtasks {currentTask.subtasks.length > 0 && `(${tasksCompleted.length} of ${currentTask.subtasks.length})`}</span>
+                    </div>
+                    <div className="taskDetailDeleteContainer">
+                        {
+                            taskDelete
+                            ?
+                            <div className="taskDetailDeleteActiveContainer">
+                                <span className='taskDetailConfirmQuestion'>Delete task forever?</span>
+                                <div className="taskDetailDeleteButtonsContainer">
+                                    <button className="taskDetailDeleteConfirmButton" onClick={handleDeleteClickConfirm}>Yes</button>
+                                    <button className="taskDetailDeleteConfirmButton" onClick={handleDeleteClickCancel}>No</button>
+                                </div>
+                            </div>
+                            :
+                            <button className="taskDetailDeleteButton" onClick={handleDeleteClick}>Delete Task</button>
+                        }
                     </div>
                 </div>
             </div>

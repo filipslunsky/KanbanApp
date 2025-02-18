@@ -103,6 +103,8 @@ export const updateTask = createAsyncThunk('tasks/updateTask', async (updateItem
 });
 
 export const deleteTask = createAsyncThunk('tasks/deleteTask', async (deleteItem, { rejectWithValue }) => {
+    console.log('triggered');
+    console.log(deleteItem);
     try {
         const user = JSON.parse(localStorage.getItem('user'));
         const headers = getHeaders();
@@ -112,7 +114,7 @@ export const deleteTask = createAsyncThunk('tasks/deleteTask', async (deleteItem
         }
 
         const response = await axios.post(
-            `${CATEGORIES_URL}/tasks/delete`,
+            `${BASE_URL}/tasks/delete`,
             {
                 email: user.email,
                 taskId: deleteItem.taskId,
@@ -120,6 +122,7 @@ export const deleteTask = createAsyncThunk('tasks/deleteTask', async (deleteItem
             { headers }
         );
 
+        console.log(response.data);
         return response.data.task;
 
     } catch (error) {
@@ -190,7 +193,7 @@ export const deleteSubtask = createAsyncThunk('tasks/deleteSubtask', async (dele
         }
 
         const response = await axios.post(
-            `${CATEGORIES_URL}/subtasks/delete`,
+            `${BASE_URL}/subtasks/delete`,
             {
                 email: user.email,
                 subtaskId: deleteItem.subtaskId,
