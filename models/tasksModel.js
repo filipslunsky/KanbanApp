@@ -1,6 +1,6 @@
 const { db } = require('../config/db.js');
 
-const _addTask = async (taskName, taskDescription, projectId, categoryId) => {
+const _addTask = async (taskName, taskDescription, projectId, categoryId, subtasks) => {
     try {
         return await db.transaction(async (trx) => {
             const project = await trx('projects')
@@ -29,10 +29,31 @@ const _addTask = async (taskName, taskDescription, projectId, categoryId) => {
             })
             .returning(['task_id','task_name', 'task_description', 'project_id', 'category_id']);
 
+            const newSubtasks = [];
+            for (let i = 0; i < subtasks.length; i++) {
+                const newSubtask = await trx('subtasks').insert({
+                    task_id: newTask[0].task_id,
+                    subtask_name: subtasks[i],
+                    is_completed: false,
+                })
+                .returning(['subtask_id', 'subtask_name', 'is_completed', 'task_id']);
+                newSubtasks.push(newSubtask[0]);
+            };
+
+            const newTaskWithSubtasks = {
+                task_id: newTask[0].task_id,
+                task_name: newTask[0].task_name,
+                task_description: newTask[0].task_description,
+                project_id: newTask[0].project_id,
+                category_id: newTask[0].category_id,
+                subtasks: newSubtasks,
+            };
+            
+
             return { 
                 success: true, 
                 message: 'Task successfully created',
-                newTask: newTask[0],
+                newTask: newTaskWithSubtasks,
             };
         });
     } catch (error) {

@@ -6,9 +6,9 @@ const {
 } = require('../models/tasksModel.js');
 
 const addTask = async (req, res) => {
-    const { taskName, taskDescription, projectId, categoryId } = req.body;
+    const { taskName, taskDescription, projectId, categoryId, subtasks } = req.body;
     try {
-        const data = await _addTask(taskName, taskDescription, projectId, categoryId);
+        const data = await _addTask(taskName, taskDescription, projectId, categoryId, subtasks);
         if (data.success) {
             res.status(200).json(data);
         } else {
