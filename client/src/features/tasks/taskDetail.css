@@ -1,4 +1,4 @@
-.newTaskOuterContainer {
+.taskDetailOuterContainer {
     position: absolute;
     top: 0;
     left: 0;
@@ -8,7 +8,7 @@
     background-color: inherit;
 }
 
-.newTaskMainContainer {
+.taskDetailMainContainer {
     width: 40%;
     height: 550px;
     background-color: white;
@@ -23,11 +23,11 @@
     border-radius: 10px;
 }
 
-.newTaskMainContainer.nightMode {
+.taskDetailMainContainer.nightMode {
     background-color: #2c2c38;
 }
 
-.newTaskHeaderContainer {
+.taskDetailHeaderContainer {
     height: 50px;
     width: 90%;
     display: flex;
@@ -35,160 +35,14 @@
     align-items: center;
 }
 
-.nightMode .newTaskHeaderContainer {
+.nightMode .taskDetailHeaderContainer {
     color: #f8f8f8;
 }
 
-.newTaskCancelButton {
+.taskDetailCancelButton {
     border: none;
     background-color: inherit;
     cursor: pointer;
-}
-
-.newTaskInputContainer {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    min-height: 50px;
-}
-
-.newTaskInputLable {
-    margin-bottom: 7px;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.nightMode .newTaskInputLable {
-    color: #f8f8f8;;
-}
-
-.newTaskInput {
-    border: 1px solid #828fa3;
-    border-radius: 5px;
-    padding-left: 5px;
-    color: #828fa3;
-    font-size: 13px;
-}
-
-.nightMode .newTaskInput {
-    background-color: #2c2c38;
-}
-
-.newTaskInput:focus {
-    outline: none;
-}
-
-.newTaskInputContainer input, select{
-    height: 25px;
-}
-
-.newTaskInputContainer textarea {
-    height: 60px;
-}
-
-.newTaskSubtasksContainer {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    max-height: 170px;
-}
-
-.newTaskSubtasksItems {
-    max-height: 120px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.newTaskSubtasksItems::-webkit-scrollbar {
-    display: none;
-}
-
-.newTaskSubtasItemContainer {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.newTaskSubtasName {
-    display: inline-block;
-    width: 90%;
-    height: auto;
-    padding: 5px;
-    color: #828fa3;
-    border: 1px solid #828fa3;
-    font-size: 15px;
-    margin-bottom: 4px;
-    border-radius: 5px;
-}
-
-.newTaskRemoveSubtaskButton {
-    border: none;
-    background-color: inherit;
-    cursor: pointer;
-}
-
-.newTaskAddSubtaskButton {
-    width: 100%;
-    height: 34px;
-    border-radius: 17px;
-    border: none;
-    font-weight: 600;
-    background-color: #828fa3;
-    color: white;
-    cursor: pointer;
-}
-
-.newTaskAddSubtaskButton:hover {
-    background-color: #A445ED;
-}
-
-.newTaskSubtaskActiveContainer {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.newTaskSubtaskActiveContainer input {
-    height: 25px;
-    font-size: 15px;
-    width: 80%;
-}
-
-.newTaskSubtaskActiveControlsContainer {
-    width: 20%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.newTaskSubtaskButton {
-    margin-left: 15px;
-    height: 18px;
-    border: none;
-    background-color: inherit;
-    cursor: pointer;
-    color: #828fa3;
-    font-weight: 600;
-}
-
-.newTaskCreateButton {
-    width: 90%;
-    margin-bottom: 15px;
-    height: 32px;
-    border-radius: 17px;
-    border: none;
-    font-weight: 600;
-    background-color: #645fc6;;
-    color: white;
-    cursor: pointer;
-}
-
-.newTaskCreateButton:hover {
-    background-color: #A445ED;
 }
 
 @media (min-width: 568px) and (max-width: 1023px) {

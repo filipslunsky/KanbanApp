@@ -67,11 +67,11 @@ const NewTask = () => {
     // status message for addTask
         useEffect(()=> {
             if (addTaskStatus === 'success') {
-                dispatch(setStatusMessage({ text: "New project board created.", visible: true, style: 'success' }));
+                dispatch(setStatusMessage({ text: "New task created.", visible: true, style: 'success' }));
                 setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
                 dispatch(resetAddTaskStatus());
             } else if (addTaskStatus === 'failed') {
-                dispatch(setStatusMessage({ text: "Failed to create new project board. Please try again.", visible: true, style: 'failed' }));
+                dispatch(setStatusMessage({ text: "Failed to create new task. Please try again.", visible: true, style: 'failed' }));
                 setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
                 dispatch(resetAddTaskStatus());
             }
