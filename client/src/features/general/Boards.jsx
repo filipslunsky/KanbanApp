@@ -3,6 +3,7 @@ import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import Categories from "../categories/Categories";
 import NewTask from "../tasks/NewTask";
+import TaskDetail from "../tasks/TaskDetail";
 import './boards.css';
 
 const Boards = () => {
@@ -35,6 +36,7 @@ const Boards = () => {
                 </div>
             </div>
             {newTaskWindow && <NewTask />}
+            {editTaskWindow && <TaskDetail />}
         </>
     );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleEditTaskWindow, setStatusMessage } from '../general/state/slice.js';
 import { updateTask, deleteTask, addSubtask, updateSubtask, deleteSubtask, resetUpdateTaskStatus, resetDeleteTaskStatus } from './state/slice.js';
@@ -13,12 +13,19 @@ const TaskDetail = () => {
     const nightMode = useSelector(state => state.general.nightMode);
     const updateTaskStatus = useSelector(state => state.tasks.updateTaskStatus);
     const deleteTaskStatus = useSelector(state => state.tasks.deleteTaskStatus);
+    const currentTask = useSelector(state => state.general.currentTask);
     // const addSubtaskStatus = useSelector(state => state.tasks.addSubtaskStatus);
     // const updateSubtaskStatus = useSelector(state => state.tasks.updateSubtaskStatus);
     // const deleteSubtaskStatus = useSelector(state => state.tasks.deleteSubtaskStatus);
 
+    const [burgerClicked, setBurgerClicked] = useState(false);
+
+    console.log(currentTask);
 
     // button click handlers
+    const handleClickClose = () => {
+        dispatch(toggleEditTaskWindow());
+    };
 
         // subtasks button click handlers
     
@@ -52,9 +59,9 @@ const TaskDetail = () => {
             <div className="taskDetailOuterContainer">
                 <div className={nightMode ? "taskDetailMainContainer nightMode" : "taskDetailMainContainer"}>
                     <div className="taskDetailHeaderContainer">
-                        <h2 className="taskDetailHeader">Task name - add dynamically</h2>
+                        <h2 className="taskDetailHeader">{currentTask.task_name}</h2>
                         <button className="taskDetailCancelButton"><img src={verticalBurgerIcon} alt="icon" className="taskDetailVerticalBurgerIcon" /></button>
-                        <button className="taskDetailCancelButton"><img src={crossIcon} alt="icon" className="taskDetailCrossIcon" /></button>
+                        <button className="taskDetailCancelButton" onClick={handleClickClose}><img src={crossIcon} alt="icon" className="taskDetailCrossIcon" /></button>
                     </div>
                 </div>
             </div>

@@ -21,7 +21,14 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
+    position: relative;
 }
+
+/* .taskDetailBurgerMenu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+} */
 
 .taskDetailMainContainer.nightMode {
     background-color: #2c2c38;
@@ -46,14 +53,14 @@
 }
 
 @media (min-width: 568px) and (max-width: 1023px) {
-    .newTaskMainContainer {
+    .taskDetailMainContainer {
         width: 60%;
         left: 20%;
     }
 }
 
 @media (max-width: 567px) {
-    .newTaskMainContainer {
+    .taskDetailMainContainer {
         width: 86%;
         left: 7%;
         top: 50px;
