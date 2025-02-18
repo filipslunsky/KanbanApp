@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleNewTaskWindow, setStatusMessage } from '../general/state/slice.js';
 import { addTask, resetAddTaskStatus } from './state/slice.js';
@@ -28,6 +28,7 @@ const NewTask = () => {
             taskDescription: desriptionRef.current.value,
             categoryId: categoryRef.current.value,
             projectId: currentProjectId,
+            subtasks: [],
         };
 
         dispatch(addTask(addItem));

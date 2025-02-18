@@ -63,6 +63,7 @@ export const addTask = createAsyncThunk('tasks/addTask', async (addItem, { rejec
                 projectId: addItem.projectId,
                 categoryId: addItem.categoryId,
                 taskName: addItem.taskName,
+                subtasks: addItem.subtasks,
             },
             { headers }
         );
