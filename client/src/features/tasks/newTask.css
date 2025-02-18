@@ -190,3 +190,18 @@
 .newTaskCreateButton:hover {
     background-color: #A445ED;
 }
+
+@media (min-width: 568px) and (max-width: 1023px) {
+    .newTaskMainContainer {
+        width: 60%;
+        left: 20%;
+    }
+}
+
+@media (max-width: 567px) {
+    .newTaskMainContainer {
+        width: 86%;
+        left: 7%;
+        top: 50px;
+    }
+}
