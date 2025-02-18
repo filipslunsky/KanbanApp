@@ -13,6 +13,7 @@ const TaskDetail = () => {
     const updateTaskStatus = useSelector(state => state.tasks.updateTaskStatus);
     const deleteTaskStatus = useSelector(state => state.tasks.deleteTaskStatus);
     const currentTask = useSelector(state => state.general.currentTask);
+    const categories = useSelector(state => state.categories.categories);
     // const addSubtaskStatus = useSelector(state => state.tasks.addSubtaskStatus);
     // const updateSubtaskStatus = useSelector(state => state.tasks.updateSubtaskStatus);
     // const deleteSubtaskStatus = useSelector(state => state.tasks.deleteSubtaskStatus);
@@ -94,7 +95,7 @@ const TaskDetail = () => {
                             ?
                             ''
                             :
-                            <h2 className="taskDetailHeader" onClick={handleTaskNameClick}>{currentTask.task_name}</h2>
+                            <h2 className="taskDetailHeader" onDoubleClick={handleTaskNameClick}>{currentTask.task_name}</h2>
                         }
                         <button className="taskDetailCancelButton" onClick={handleClickClose}><img src={crossIcon} alt="icon" className="taskDetailCrossIcon" /></button>
                     </div>
@@ -104,13 +105,39 @@ const TaskDetail = () => {
                             ?
                             ''
                             :
-                            <span className="taskDetailTaskDescriptionText" onClick={handleTaskDescriptionClick}>
+                            <span className="taskDetailTaskDescriptionText" onDoubleClick={handleTaskDescriptionClick}>
                                 {currentTask.task_description}
                             </span>
                         }
                     </div>
                     <div className="taskDetailSubtasksContainer">
                         <span className="taskDetailLable">Subtasks {currentTask.subtasks.length > 0 && `(${tasksCompleted.length} of ${currentTask.subtasks.length})`}</span>
+                        <div className="taskDetailSubtaskItemsConatianer">
+                            {
+                                currentTask.subtasks.map(item => {
+                                    return (
+                                        <div className="taskDetailSubtaskItemContainer" key={item.subtask_id}>
+                                            <input type="checkbox" className="taskDetailSubtaskCheckBox" defaultChecked={item.is_completed ? true : false} />
+                                            <span className="taskDetailSubtaskName">{item.subtask_name}</span>
+                                            <button className="taskDetailSubtaskDelete">
+                                                <img src={crossIcon} alt="icon" className="taskDetailCrossIcon" />
+                                            </button>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                    <div className="taskDetailCategoryContainer">
+                        <select className='newTaskInput' name="category" id="newItemCategory" defaultValue={currentTask.category_id}>
+                                {
+                                    categories.map(item => {
+                                        return (
+                                            <option key={item.category_id} value={item.category_id}>{item.category_name}</option>
+                                        )
+                                    })
+                                }
+                        </select>
                     </div>
                     <div className="taskDetailDeleteContainer">
                         {
