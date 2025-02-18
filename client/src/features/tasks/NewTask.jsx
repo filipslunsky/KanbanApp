@@ -12,10 +12,16 @@ const NewTask = () => {
     const categories = useSelector(state => state.categories.categories);
     const currentProjectId = useSelector(state => state.general.currentProjectId);
     const addTaskStatus = useSelector(state => state.tasks.addTaskStatus);
+    const nightMode = useSelector(state => state.general.nightMode);
 
     const nameRef = useRef();
     const desriptionRef = useRef();
     const categoryRef = useRef();
+    const newSubtaskNameRef = useRef();
+    // const updatedSubtaskNameRef = useRef();
+
+    const [newSubtask, setNewSubtask] = useState(false);
+    const [subtasksArr, setSubtasksArr] = useState([]);
 
     // button click handlers
     const handleClickCancel = () => {
@@ -35,6 +41,29 @@ const NewTask = () => {
         dispatch(toggleNewTaskWindow());
     };
 
+        // subtasks button click handlers
+    const handleNewSubtaskClick = () => {
+        setNewSubtask(true);
+    };
+
+    const handleNewSubtaskCancelClick = () => {
+        setNewSubtask(false);
+    };
+
+    const handleNewSubtaskAdd = () => {
+        if (newSubtaskNameRef.current.value.length === 0) return;
+        setSubtasksArr(prev => [...prev, newSubtaskNameRef.current.value]);
+        setNewSubtask(false);
+    };
+
+    const handleRemoveSubtask = (index) => {
+        setSubtasksArr(prev => prev.filter((_, i) => i !== index));
+    };
+    
+    // const handleUpdateSubtask = (index) => {
+    //     setSubtasksArr(prev => prev.map((item, i) => i === index ? updatedSubtaskNameRef.current.value : item));
+    // };
+
     // status message for addTask
         useEffect(()=> {
             if (addTaskStatus === 'success') {
@@ -51,7 +80,7 @@ const NewTask = () => {
     return (
         <>
             <div className="newTaskOuterContainer">
-                <div className="newTaskMainContainer">
+                <div className={nightMode ? "newTaskMainContainer nightMode" : "newTaskMainContainer"}>
                     <div className="newTaskHeaderContainer">
                         <h2 className="newTaskHeader">Add New Task</h2>
                         <button className="newTaskCancelButton" onClick={handleClickCancel}><img src={crossIcon} alt="icon" className="newTaskCrossIcon" /></button>
@@ -64,9 +93,39 @@ const NewTask = () => {
                         <span className="newTaskInputLable">Description</span>
                         <textarea type="text" className="newTaskInput" ref={desriptionRef} />
                     </div>
+                    <div className="newTaskSubtasksContainer">
+                        <span className="newTaskInputLable">Subtasks</span>
+                        <div className="newTaskSubtasksItems">
+                            {
+                                subtasksArr.map((item, index) => {
+                                    return (
+                                        <div className="newTaskSubtasItemContainer" key={index}>
+                                            <span className="newTaskSubtasName">{item}</span>
+                                            <button className="newTaskRemoveSubtaskButton" onClick={() => {handleRemoveSubtask(index)}}>
+                                                <img src={crossIcon} alt="icon" className="newTaskCrossIcon" />
+                                            </button>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        {
+                           newSubtask
+                           ?
+                           <div className="newTaskSubtaskActiveContainer">
+                                <input type="text" className="newTaskInput" ref={newSubtaskNameRef} />
+                                <div className="newTaskSubtaskActiveControlsContainer">
+                                    <button className="newTaskSubtaskButton" onClick={handleNewSubtaskAdd}>Add</button>
+                                    <button className="newTaskSubtaskButton" onClick={handleNewSubtaskCancelClick}><img src={crossIcon} alt="icon" className="newTaskCrossIcon" /></button>
+                                </div>
+                           </div>
+                           :
+                           <button className="newTaskAddSubtaskButton" onClick={handleNewSubtaskClick}>+ Add New Subtask</button>
+                        }
+                    </div>
                     <div className="newTaskInputContainer">
                         <span className="newTaskInputLable">Status</span>
-                        <select name="category" id="newItemCategory" ref={categoryRef}>
+                        <select className='newTaskInput' name="category" id="newItemCategory" ref={categoryRef}>
                             {
                                 categories.map(item => {
                                     return (

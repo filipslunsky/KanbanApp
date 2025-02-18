@@ -43,6 +43,7 @@
     color: white;
 }
 
+/* fix text break in this element */
 .taskItemName {
     font-weight: 600;
     font-size: 19px;
