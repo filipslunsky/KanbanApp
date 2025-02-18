@@ -34,7 +34,7 @@ const NewTask = () => {
             taskDescription: desriptionRef.current.value,
             categoryId: categoryRef.current.value,
             projectId: currentProjectId,
-            subtasks: [],
+            subtasks: subtasksArr,
         };
 
         dispatch(addTask(addItem));
