@@ -84,7 +84,7 @@ const Category = ({categoryId, categoryName}) => {
     return (
         <>
             <div className={nightMode ? "categoryTitleContainer nightMode" : "categoryTitleContainer"}>
-                <h2 className="categoryTitle">{categoryName} (0)</h2>
+                <h2 className="categoryTitle">{categoryName} ({filteredTasks.length})</h2>
                 <div className="categoryControlsContainer">
                     {
                         updateCategoryClicked

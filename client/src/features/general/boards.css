@@ -2,6 +2,10 @@
     display: flex;
 }
 
+.boardsMainContainer.darkenInactive {
+    filter: brightness(0.25);
+}
+
 .boardsRightContainer {
     display: flex;
     flex-direction: column;

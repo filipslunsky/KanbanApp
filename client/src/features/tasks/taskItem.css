@@ -24,6 +24,10 @@
     cursor: grab;
 }
 
+.taskItemLeftContainer:active {
+    cursor: grabbing;
+}
+
 .taskItemRightContainer {
     display: flex;
     flex-direction: column;

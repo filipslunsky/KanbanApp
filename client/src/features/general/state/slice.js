@@ -13,6 +13,7 @@ const initialState = {
     sideBar: true,
     profileDetail: false,
     newTaskWindow: false,
+    editTaskWindow: false,
     currentProjectId: null,
     statusMessage: {
         text: '',
@@ -144,6 +145,9 @@ const generalSlice = createSlice({
         toggleNewTaskWindow: (state) => {
             state.newTaskWindow = !state.newTaskWindow;
         },
+        toggleEditTaskWindow: (state) => {
+            state.editTaskWindow = !state.editTaskWindow;
+        },
         toggleProfileDetailWindow: (state) => {
             state.profileDetail = !state.profileDetail;
         },
@@ -227,6 +231,7 @@ export const {
     toggleSideBar,
     toggleNewTaskWindow,
     toggleProfileDetailWindow,
+    toggleEditTaskWindow,
     resetAddProjectStatus,
     resetUpdateProjectStatus,
     resetDeleteProjectStatus,

@@ -2,7 +2,6 @@ import verticalBurgerIcon from '../../assets/img/icon-vertical-ellipsis.svg';
 import './taskItem.css';
 
 const TaskItem = ({taskItem}) => {
-    console.log(taskItem);
     const subtasksTotal = taskItem.subtasks.length;
 
     const subtasksFinished = taskItem.subtasks.filter(item => item.is_completed === true).length;
