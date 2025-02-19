@@ -67,16 +67,18 @@ const TaskDetail = () => {
     };
 
     const handleUpdateTask = () => {
-        console.log('running');
         const updateItem = {
             taskId: currentTask.task_id,
-            taskName: taskNameRef.current.value,
-            taskDescription: currentTask.task_description,
-            categoryId: currentTask.category_id,
+            taskName: taskNameRef.current ? taskNameRef.current.value : currentTask.task_name,
+            taskDescription: taskDescriptionRef.current ? taskDescriptionRef.current.value : currentTask.task_description,
+            categoryId: taskCategoryRef.current ? taskCategoryRef.current.value : currentTask.category_id,
         };
+
+        console.log(taskCategoryRef.current.value);
+
         dispatch(updateTask(updateItem));
-        
         setEditTaskName(false);
+        setEditTaskDescription(false);
     };
     
         // subtasks button click handlers
@@ -128,10 +130,14 @@ const TaskDetail = () => {
                         <button className="taskDetailCancelButton" onClick={handleClickClose}><img src={crossIcon} alt="icon" className="taskDetailCrossIcon" /></button>
                     </div>
                     <div className="taskDetailTaskDescriptionContainer">
+                        <span className="taskDetailLable">Description</span>
                         {
                             editTaskDescription
                             ?
-                            ''
+                            <div className="taskDetaitEditDescriptionContainer">
+                                <textarea  className="taskDetailEditDescriptionInput" defaultValue={currentTask.task_description} ref={taskDescriptionRef} />
+                                <button className="taskDetailEditConfirmButton" onClick={handleUpdateTask}>ok</button>
+                            </div>
                             :
                             <span className="taskDetailTaskDescriptionText" onDoubleClick={handleTaskDescriptionClick}>
                                 {currentTask.task_description}
@@ -162,7 +168,7 @@ const TaskDetail = () => {
                         </div>
                     </div>
                     <div className="taskDetailCategoryContainer">
-                        <select className='newTaskInput' name="category" id="newItemCategory" defaultValue={currentTask.category_id}>
+                        <select className='newTaskInput' name="category" id="newItemCategory" ref={taskCategoryRef} defaultValue={currentTask.category_id} onChange={handleUpdateTask}>
                                 {
                                     categories.map(item => {
                                         return (

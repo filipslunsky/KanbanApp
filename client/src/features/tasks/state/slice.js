@@ -90,6 +90,7 @@ export const updateTask = createAsyncThunk('tasks/updateTask', async (updateItem
                 email: user.email,
                 taskName: updateItem.taskName,
                 taskId: updateItem.taskId,
+                taskDescription: updateItem.taskDescription,
                 categoryId: updateItem.categoryId,
             },
             { headers }
