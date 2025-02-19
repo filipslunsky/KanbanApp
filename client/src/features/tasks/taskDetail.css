@@ -35,7 +35,8 @@
 }
 
 .taskDetailHeaderContainer {
-    height: 50px;
+    height: 40px;
+    margin-top: 10px;
     width: 90%;
     display: flex;
     justify-content: space-between;
@@ -50,6 +51,249 @@
     border: none;
     background-color: inherit;
     cursor: pointer;
+}
+
+.taskDetailTaskDescriptionContainer {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 150px;
+    color: #828fa3;
+}
+
+.taskDetailLable {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.taskDetailTaskDescriptionText {
+    height: 125px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    cursor: pointer;
+}
+
+.taskDetailTaskDescriptionText::-webkit-scrollbar {
+    display: none;
+}
+
+.taskDetaitEditDescriptionContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 125px;
+    align-items: flex-end;
+}
+
+.taskDetailEditDescriptionInput {
+    width: 98%;
+    height: 110px;
+    margin-bottom: 5px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    padding: 1%;
+    scrollbar-width: none;
+}
+
+.nightMode .taskDetailEditDescriptionInput {
+    background-color: #21212d;
+    color: #828fa3;
+}
+
+.taskDetailEditDescriptionInput:focus {
+    outline: none;    
+}
+
+.taskDetailEditConfirmButton {
+    border: none;
+    background-color: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    color: #828fa3;
+}
+
+.taskDetailEditConfirmButton:hover {
+    color: #A445ED;
+}
+
+.taskDetailSubtasksContainer {
+    width: 90%;
+    color: #828fa3;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.taskDetailSubtaskItemsConatianer {
+    height: 140px;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    cursor: pointer;
+}
+
+.taskDetailSubtaskItemsConatianer::-webkit-scrollbar {
+    display: none;
+}
+
+.taskDetailSubtaskItemContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+    margin-bottom: 5px;
+    background-color: #f8f8f8;
+    padding: 0 10px;
+    border-radius: 5px;
+    color: #828fa3;
+}
+
+.nightMode .taskDetailSubtaskItemContainer {
+    background-color: #21212d;
+}
+
+.taskDetailSubtaskCheckBox {
+    width: 15px;
+    height: 15px;
+    appearance: none;
+    background-color: #828fa3;
+    border: 2px solid #645fc6;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.taskDetailSubtaskCheckBox:checked {
+    background-color: #645fc6;
+    border-color: #645fc6;
+    position: relative;
+}
+
+.taskDetailSubtaskCheckBox:checked::after {
+    content: "✔";
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.taskDetailSubtaskName {
+    display: inline-block;
+    width: 90%;
+}
+
+.taskDetailSubtaskDelete {
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.taskDetaitEditNameContainer {
+    width: 90%;
+}
+
+.taskDetailEditSubtaskNameInput {
+    width: 90%;
+    margin-right: 5px;
+    border: 1px solid #828fa3;
+    border-radius: 5px;
+    color: #828fa3;
+    padding-left: 5px;
+    background-color: #f8f8f8;
+}
+
+.nightMode .taskDetailEditSubtaskNameInput {
+    color: white;
+}
+
+.taskDetailEditSubtaskNameInput:focus {
+    outline: none;
+}
+
+.taskDetailAddSubtaskButton {
+    border: none;
+    width: 100%;
+    margin-top: 15px;
+    height: 25px;
+    border-radius: 13px;
+    font-weight: 600;
+    background-color: #828fa3;
+    color: white;
+    cursor: pointer;
+}
+
+.taskDetailAddSubtaskButton:hover {
+    background-color: #A445ED;
+}
+
+.taskDetailCategoryContainer {
+    width: 90%;
+}
+
+.newTaskInput {
+    width: 100%;
+}
+
+.taskDetailDeleteContainer {
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+.taskDetailDeleteButton {
+    border: none;
+    width: 100%;
+    margin-top: 5px;
+    height: 25px;
+    border-radius: 13px;
+    font-weight: 600;
+    background-color: #645fc6;
+    color: white;
+    cursor: pointer;
+}
+
+.taskDetailDeleteButton:hover {
+    background-color: #A445ED;
+}
+
+.taskDetailDeleteActiveContainer {
+    width: 100%;
+    color: #828fa3;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.taskDetailDeleteButtonsContainer {
+    width: 20%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.taskDetailDeleteConfirmButton {
+    border: none;
+    background-color: inherit;
+    color: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.taskDetailDeleteConfirmButton:hover {
+    color: #A445ED;
 }
 
 @media (min-width: 568px) and (max-width: 1023px) {

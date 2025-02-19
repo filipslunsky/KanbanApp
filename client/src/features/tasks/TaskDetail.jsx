@@ -98,7 +98,7 @@ const TaskDetail = () => {
     const handleSubtaskNameClick = (subtaskId) => {
         setSubtaskEdit(subtaskId);
         setAddNewSubtask(false);
-        setTaskDelete(true);
+        setTaskDelete(false);
         setEditTaskName(false);
         setEditTaskDescription(false);
     };
@@ -214,17 +214,18 @@ const TaskDetail = () => {
                                     )
                                 })
                             }
-                            {
-                                addNewSubtask
-                                ?
-                                <div className="taskDetailAddSubtaskActiveContainer">
-                                    <input type="text" className="taskDetailAddSubtaskNameInput" ref={newSubtaskNameRef} />
-                                    <button className="taskDetailEditConfirmButton" onClick={handleAddNewSubtaskOk}>ok</button>
-                                </div>
-                                :
-                                <button className="taskDetailAddSubtaskButton" onClick={handleClickAddNewSubtask}>+ Add Subtask</button>
-                            }
                         </div>
+                        {
+                            addNewSubtask
+                            ?
+                            <div className="taskDetailAddSubtaskActiveContainer">
+                                <input type="text" className="taskDetailAddSubtaskNameInput" ref={newSubtaskNameRef} />
+                                <button className="taskDetailEditConfirmButton" onClick={handleAddNewSubtaskOk}>ok</button>
+                            </div>
+                            :
+                            <button className="taskDetailAddSubtaskButton" onClick={handleClickAddNewSubtask}>+ Add Subtask</button>
+                        }
+                        
                     </div>
                     <div className="taskDetailCategoryContainer">
                         <select className='newTaskInput' name="category" id="newItemCategory" ref={taskCategoryRef} defaultValue={currentTask.category_id} onChange={handleUpdateTask}>
