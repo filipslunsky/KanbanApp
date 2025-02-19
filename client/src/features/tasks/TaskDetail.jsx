@@ -23,6 +23,7 @@ const TaskDetail = () => {
     const [editTaskDescription, setEditTaskDescription] = useState(false);
     const [taskDelete, setTaskDelete] = useState(false);
     const [subtaskEdit, setSubtaskEdit] = useState(0);
+    const [addNewSubtask, setAddNewSubtask] = useState(false);
 
     const taskNameRef = useRef();
     const taskDescriptionRef = useRef();
@@ -43,6 +44,7 @@ const TaskDetail = () => {
         setEditTaskDescription(false);
         setTaskDelete(false);
         setSubtaskEdit(0);
+        setAddNewSubtask(false);
     };
 
     const handleTaskDescriptionClick = () => {
@@ -50,6 +52,7 @@ const TaskDetail = () => {
         setEditTaskName(false);
         setTaskDelete(false);
         setSubtaskEdit(0);
+        setAddNewSubtask(false);
     };
 
     const handleDeleteClick = () => {
@@ -57,6 +60,7 @@ const TaskDetail = () => {
         setEditTaskName(false);
         setEditTaskDescription(false);
         setSubtaskEdit(0);
+        setAddNewSubtask(false);
     };
 
     const handleDeleteClickCancel = () => {
@@ -80,17 +84,38 @@ const TaskDetail = () => {
         setEditTaskName(false);
         setEditTaskDescription(false);
         setSubtaskEdit(0);
+        setAddNewSubtask(false);
     };
     
         // subtasks button click handlers
     const handleUpdateSubtask = (subtaskId, subtaskName, isCompleted) => {
         dispatch(updateSubtask({subtaskId, subtaskName, isCompleted}));
         setSubtaskEdit(0);
+        setAddNewSubtask(false);
     };
 
     const handleSubtaskNameClick = (subtaskId) => {
         setSubtaskEdit(subtaskId);
+        setAddNewSubtask(false);
+        setTaskDelete(true);
+        setEditTaskName(false);
+        setEditTaskDescription(false);
     };
+
+    const handleClickAddNewSubtask = () => {
+        setAddNewSubtask(true);
+        setTaskDelete(true);
+        setEditTaskName(false);
+        setEditTaskDescription(false);
+        setSubtaskEdit(0);
+    };
+
+    const handleAddNewSubtaskOk = () => {};
+
+    const handleDeleteSubtask = (subtaskId) => {
+        dispatch(deleteSubtask({subtaskId}));
+    };
+
     
     // status message for updateTask
     useEffect(()=> {
@@ -172,7 +197,7 @@ const TaskDetail = () => {
                                                 :
                                                 <span className="taskDetailSubtaskName" onDoubleClick={() => {handleSubtaskNameClick(item.subtask_id)}}>{item.subtask_name}</span>
                                             }
-                                            <button className="taskDetailSubtaskDelete">
+                                            <button className="taskDetailSubtaskDelete" onClick={() => {handleDeleteSubtask(item.subtask_id)}}>
                                                 <img src={crossIcon} alt="icon" className="taskDetailCrossIcon" />
                                             </button>
                                         </div>

@@ -23,6 +23,7 @@ const Categories = () => {
     const deleteTaskStatus = useSelector(state => state.tasks.deleteTaskStatus);
     const updateTaskStatus = useSelector(state => state.tasks.updateTaskStatus);
     const updateSubtaskStatus = useSelector(state => state.tasks.updateSubtaskStatus);
+    const deleteSubtaskStatus = useSelector(state => state.tasks.deleteSubtaskStatus);
 
     // getting categories after loading and changing their items
     useEffect(() => {
@@ -36,7 +37,7 @@ const Categories = () => {
         if (currentProjectId !== null) {
             dispatch(getTasks({projectId: currentProjectId}));
         };
-        }, [dispatch, currentProjectId, addTaskStatus, deleteTaskStatus, updateSubtaskStatus, updateTaskStatus]);
+        }, [dispatch, currentProjectId, addTaskStatus, deleteTaskStatus, updateSubtaskStatus, updateTaskStatus, deleteSubtaskStatus]);
 
     if (categoriesStatus === 'loading') {
         return (<div className={nightMode ? "categoriesMainContainer nightMode" : "categoriesMainContainer"}>Loading...</div>)
