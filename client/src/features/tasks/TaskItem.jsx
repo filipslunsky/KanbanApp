@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setCurrentTask, toggleEditTaskWindow } from '../general/state/slice';
+import { setCurrentTaskId, toggleEditTaskWindow } from '../general/state/slice';
 import verticalBurgerIcon from '../../assets/img/icon-vertical-ellipsis.svg';
 import './taskItem.css';
 
@@ -7,7 +7,7 @@ const TaskItem = ({taskItem}) => {
     const dispatch = useDispatch();
 
     const handleClickTask = () => {
-        dispatch(setCurrentTask({taskItem}));
+        dispatch(setCurrentTaskId(taskItem.task_id));
         dispatch(toggleEditTaskWindow());
     };
 

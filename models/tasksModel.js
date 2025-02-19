@@ -136,14 +136,16 @@ const _getTasksByProjectId = async (projectId) => {
 
             const tasks = await trx('tasks')
             .select('task_id', 'task_name', 'task_description', 'category_id', 'project_id')
-            .where({project_id: project.project_id});
+            .where({project_id: project.project_id})
+            .orderBy('task_id', 'asc');
 
             const tasksAndSubtasks = [];
 
             for (let task of tasks) {
                 const subtasks = await trx('subtasks')
                 .select('subtask_id', 'subtask_name', 'is_completed', 'task_id')
-                .where({task_id: task.task_id});
+                .where({task_id: task.task_id})
+                .orderBy('subtask_id', 'asc');
 
                 tasksAndSubtasks.push({...task, subtasks});
             };

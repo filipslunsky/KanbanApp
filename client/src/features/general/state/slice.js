@@ -15,7 +15,7 @@ const initialState = {
     newTaskWindow: false,
     editTaskWindow: false,
     currentProjectId: null,
-    currentTask: {},
+    currentTaskId: null,
     statusMessage: {
         text: '',
         style: '',
@@ -171,8 +171,8 @@ const generalSlice = createSlice({
         setCurrentProjectId: (state, action) => {
             state.currentProjectId = action.payload;
         },
-        setCurrentTask: (state, action) => {
-            state.currentTask = action.payload.taskItem;
+        setCurrentTaskId: (state, action) => {
+            state.currentTaskId = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -241,6 +241,6 @@ export const {
     resetDeleteProjectStatus,
     setStatusMessage,
     setCurrentProjectId,
-    setCurrentTask,
+    setCurrentTaskId,
 } = generalSlice.actions;
 export default generalSlice.reducer;

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleEditTaskWindow, setStatusMessage } from '../general/state/slice.js';
+import { toggleEditTaskWindow, setStatusMessage, setCurrentTaskId } from '../general/state/slice.js';
 import { updateTask, deleteTask, addSubtask, updateSubtask, deleteSubtask, resetUpdateTaskStatus, resetDeleteTaskStatus } from './state/slice.js';
 import crossIcon from '../../assets/img/icon-cross.svg';
 import './taskDetail.css';
@@ -12,8 +12,9 @@ const TaskDetail = () => {
     const nightMode = useSelector(state => state.general.nightMode);
     const updateTaskStatus = useSelector(state => state.tasks.updateTaskStatus);
     const deleteTaskStatus = useSelector(state => state.tasks.deleteTaskStatus);
-    const currentTask = useSelector(state => state.general.currentTask);
+    const currentTaskId = useSelector(state => state.general.currentTaskId);
     const categories = useSelector(state => state.categories.categories);
+    const tasks = useSelector(state => state.tasks.tasks);
     // const addSubtaskStatus = useSelector(state => state.tasks.addSubtaskStatus);
     // const updateSubtaskStatus = useSelector(state => state.tasks.updateSubtaskStatus);
     // const deleteSubtaskStatus = useSelector(state => state.tasks.deleteSubtaskStatus);
@@ -21,6 +22,13 @@ const TaskDetail = () => {
     const [editTaskName, setEditTaskName] = useState(false);
     const [editTaskDescription, setEditTaskDescription] = useState(false);
     const [taskDelete, setTaskDelete] = useState(false);
+
+    const taskNameRef = useRef();
+    const taskDescriptionRef = useRef();
+    const subtaskNameRef = useRef();
+    const taskCategoryRef = useRef();
+
+    const currentTask = tasks.filter(item => item.task_id === currentTaskId)[0];
 
     const tasksCompleted = currentTask.subtasks.filter(item => item.is_completed === true);
 
@@ -57,8 +65,25 @@ const TaskDetail = () => {
         dispatch(deleteTask({taskId: currentTask.task_id}));
         dispatch(toggleEditTaskWindow());
     };
+
+    const handleUpdateTask = () => {
+        console.log('running');
+        const updateItem = {
+            taskId: currentTask.task_id,
+            taskName: taskNameRef.current.value,
+            taskDescription: currentTask.task_description,
+            categoryId: currentTask.category_id,
+        };
+        dispatch(updateTask(updateItem));
+        
+        setEditTaskName(false);
+    };
     
         // subtasks button click handlers
+    const handleUpdateSubtask = (subtaskId, subtaskName, isCompleted) => {
+        dispatch(updateSubtask({subtaskId, subtaskName, isCompleted}));
+    };
+    
     
     // status message for updateTask
     useEffect(()=> {
@@ -93,7 +118,10 @@ const TaskDetail = () => {
                         {
                             editTaskName
                             ?
-                            ''
+                            <div className="taskDetaitEditNameContainer">
+                                <input type="text" className="taskDetailEditNameInput" defaultValue={currentTask.task_name} ref={taskNameRef} />
+                                <button className="taskDetailEditConfirmButton" onClick={handleUpdateTask}>ok</button>
+                            </div>
                             :
                             <h2 className="taskDetailHeader" onDoubleClick={handleTaskNameClick}>{currentTask.task_name}</h2>
                         }
@@ -117,7 +145,12 @@ const TaskDetail = () => {
                                 currentTask.subtasks.map(item => {
                                     return (
                                         <div className="taskDetailSubtaskItemContainer" key={item.subtask_id}>
-                                            <input type="checkbox" className="taskDetailSubtaskCheckBox" defaultChecked={item.is_completed ? true : false} />
+                                            <input
+                                            type="checkbox"
+                                            className="taskDetailSubtaskCheckBox"
+                                            defaultChecked={item.is_completed ? true : false}
+                                            onChange={() => {handleUpdateSubtask(item.subtask_id, item.subtask_name, !item.is_completed)}}
+                                            />
                                             <span className="taskDetailSubtaskName">{item.subtask_name}</span>
                                             <button className="taskDetailSubtaskDelete">
                                                 <img src={crossIcon} alt="icon" className="taskDetailCrossIcon" />
