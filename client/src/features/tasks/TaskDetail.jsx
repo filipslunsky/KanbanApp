@@ -22,6 +22,7 @@ const TaskDetail = () => {
     const [editTaskName, setEditTaskName] = useState(false);
     const [editTaskDescription, setEditTaskDescription] = useState(false);
     const [taskDelete, setTaskDelete] = useState(false);
+    const [subtaskEdit, setSubtaskEdit] = useState(0);
 
     const taskNameRef = useRef();
     const taskDescriptionRef = useRef();
@@ -32,8 +33,6 @@ const TaskDetail = () => {
 
     const tasksCompleted = currentTask.subtasks.filter(item => item.is_completed === true);
 
-    console.log(currentTask);
-
     // button click handlers
     const handleClickClose = () => {
         dispatch(toggleEditTaskWindow());
@@ -43,18 +42,21 @@ const TaskDetail = () => {
         setEditTaskName(true);
         setEditTaskDescription(false);
         setTaskDelete(false);
+        setSubtaskEdit(0);
     };
 
     const handleTaskDescriptionClick = () => {
         setEditTaskDescription(true);
         setEditTaskName(false);
         setTaskDelete(false);
+        setSubtaskEdit(0);
     };
 
     const handleDeleteClick = () => {
         setTaskDelete(true);
         setEditTaskName(false);
         setEditTaskDescription(false);
+        setSubtaskEdit(0);
     };
 
     const handleDeleteClickCancel = () => {
@@ -74,18 +76,21 @@ const TaskDetail = () => {
             categoryId: taskCategoryRef.current ? taskCategoryRef.current.value : currentTask.category_id,
         };
 
-        console.log(taskCategoryRef.current.value);
-
         dispatch(updateTask(updateItem));
         setEditTaskName(false);
         setEditTaskDescription(false);
+        setSubtaskEdit(0);
     };
     
         // subtasks button click handlers
     const handleUpdateSubtask = (subtaskId, subtaskName, isCompleted) => {
         dispatch(updateSubtask({subtaskId, subtaskName, isCompleted}));
+        setSubtaskEdit(0);
     };
-    
+
+    const handleSubtaskNameClick = (subtaskId) => {
+        setSubtaskEdit(subtaskId);
+    };
     
     // status message for updateTask
     useEffect(()=> {
@@ -157,7 +162,16 @@ const TaskDetail = () => {
                                             defaultChecked={item.is_completed ? true : false}
                                             onChange={() => {handleUpdateSubtask(item.subtask_id, item.subtask_name, !item.is_completed)}}
                                             />
-                                            <span className="taskDetailSubtaskName">{item.subtask_name}</span>
+                                            {
+                                                item.subtask_id == subtaskEdit
+                                                ?
+                                                <div className="taskDetaitEditNameContainer">
+                                                    <input type="text" className="taskDetailEditSubtaskNameInput" defaultValue={item.subtask_name} ref={subtaskNameRef} />
+                                                    <button className="taskDetailEditConfirmButton" onClick={() => {handleUpdateSubtask(item.subtask_id, subtaskNameRef.current.value, item.is_completed)}}>ok</button>
+                                                </div>
+                                                :
+                                                <span className="taskDetailSubtaskName" onDoubleClick={() => {handleSubtaskNameClick(item.subtask_id)}}>{item.subtask_name}</span>
+                                            }
                                             <button className="taskDetailSubtaskDelete">
                                                 <img src={crossIcon} alt="icon" className="taskDetailCrossIcon" />
                                             </button>
