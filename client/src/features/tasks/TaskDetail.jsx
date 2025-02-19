@@ -29,6 +29,7 @@ const TaskDetail = () => {
     const taskDescriptionRef = useRef();
     const subtaskNameRef = useRef();
     const taskCategoryRef = useRef();
+    const newSubtaskNameRef = useRef();
 
     const currentTask = tasks.filter(item => item.task_id === currentTaskId)[0];
 
@@ -104,13 +105,22 @@ const TaskDetail = () => {
 
     const handleClickAddNewSubtask = () => {
         setAddNewSubtask(true);
-        setTaskDelete(true);
+        setTaskDelete(false);
         setEditTaskName(false);
         setEditTaskDescription(false);
         setSubtaskEdit(0);
     };
 
-    const handleAddNewSubtaskOk = () => {};
+    const handleAddNewSubtaskOk = () => {
+        if (newSubtaskNameRef.current.value === '') return;
+        const newSubtaskItem = {
+            taskId: currentTask.task_id,
+            subtaskName: newSubtaskNameRef.current.value,
+            isCompleted: false,
+        };
+        dispatch(addSubtask(newSubtaskItem));
+        setAddNewSubtask(false);
+    };
 
     const handleDeleteSubtask = (subtaskId) => {
         dispatch(deleteSubtask({subtaskId}));
@@ -203,6 +213,16 @@ const TaskDetail = () => {
                                         </div>
                                     )
                                 })
+                            }
+                            {
+                                addNewSubtask
+                                ?
+                                <div className="taskDetailAddSubtaskActiveContainer">
+                                    <input type="text" className="taskDetailAddSubtaskNameInput" ref={newSubtaskNameRef} />
+                                    <button className="taskDetailEditConfirmButton" onClick={handleAddNewSubtaskOk}>ok</button>
+                                </div>
+                                :
+                                <button className="taskDetailAddSubtaskButton" onClick={handleClickAddNewSubtask}>+ Add Subtask</button>
                             }
                         </div>
                     </div>
