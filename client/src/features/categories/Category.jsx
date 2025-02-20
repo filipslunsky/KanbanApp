@@ -22,7 +22,6 @@ const Category = ({categoryId, categoryName}) => {
     const categoryNameRef = useRef();
 
     const [updateCategoryClicked, setUpdateCategoryClicked] = useState(false);
-    const [deleteCategoryClicked, setDeleteCategoryClicked] = useState(false);
 
     // category edit handlers
     const handleUpdateClick = () => {
@@ -43,15 +42,6 @@ const Category = ({categoryId, categoryName}) => {
     };
 
     // category delete handlers
-    const handleDeleteClick = () => {
-        setDeleteCategoryClicked(true);
-        setUpdateCategoryClicked(false);
-    };
-
-    const handleDeleteClickCancel = () => {
-        setDeleteCategoryClicked(false);
-    };
-
     const handleDeleteClickOk = () => {
         dispatch(deleteCategory({categoryId}));
         setDeleteCategoryClicked(false);
@@ -88,7 +78,7 @@ const Category = ({categoryId, categoryName}) => {
     return (
         <>
             <div className={nightMode ? "categoryTitleContainer nightMode" : "categoryTitleContainer"}>
-                <h2 className="categoryTitle">{categoryName} ({filteredTasks.length})</h2>
+                
                 <div className="categoryControlsContainer">
                     {
                         updateCategoryClicked
@@ -102,20 +92,10 @@ const Category = ({categoryId, categoryName}) => {
                             />
                             <button className="categoryConfirmButton" onClick={handleUdpateClickOk}>save</button>
                             <button className="categoryCancelButton" onClick={handleUpdateClickCancel}>cancel</button>
+                            <button className="categoryConfirmButton" onClick={handleDeleteClickOk}>delete</button>
                         </div>
                         :
-                        <button className="categoryHeaderButton" onClick={handleUpdateClick}>edit</button>
-                    }
-                    {
-                        deleteCategoryClicked
-                        ?
-                        <div className="categoryActiveContainer">
-                            <span className="categoryConfirmQuestion">Delete this column?</span>
-                            <button className="categoryCancelButton" onClick={handleDeleteClickCancel}>no</button>
-                            <button className="categoryConfirmButton" onClick={handleDeleteClickOk}>yes</button>
-                        </div>
-                        :
-                        <button className="categoryHeaderButton" onClick={handleDeleteClick}>delete</button>
+                        <h2 className="categoryTitle" onDoubleClick={handleUpdateClick} >{categoryName} ({filteredTasks.length})</h2>
                     }
                 </div>
             </div>
