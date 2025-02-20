@@ -165,25 +165,14 @@ const Projects = () => {
                                                 ref={projectNameRef}
                                                 defaultValue={item.project_name}
                                                 />
-                                                <button className="projectsActiveItemConfirmButton" onClick={() => {handleOkEditProject(item.project_id)}}>ok</button>
-                                                <button className="projectsActiveItemCancelButton" onClick={handleCancelEditProject}>cancel</button>
+                                                <div className="projectsActiveControlsContainer">
+                                                    <button className="projectsActiveItemConfirmButton" onClick={() => {handleOkEditProject(item.project_id)}}>ok</button>
+                                                    <button className="projectsActiveItemCancelButton" onClick={handleCancelEditProject}>cancel</button>
+                                                    <button className="projectsActiveItemConfirmButton" onClick={() => {handleOkDeleteProject(item.project_id)}}>delete</button>
+                                                </div>
                                             </div>
                                             :
-                                            <>
-                                                <span className="projectsProjectTitle">{item.project_name}</span>
-                                                <button className='projectsItemEditButton' onClick={() => {handleEditProject(item.project_id)}}>edit</button>
-                                                {
-                                                    item.project_id == removeProject
-                                                    ?
-                                                    <div className="projectsActiveItemContainer">
-                                                        <span className="projectsActiveItemQuestion">Delete?</span>
-                                                        <button className="projectsActiveItemCancelButton" onClick={handleCancelDeleteProject}>no</button>
-                                                        <button className="projectsActiveItemConfirmButton" onClick={() => {handleOkDeleteProject(item.project_id)}}>yes</button>
-                                                    </div>
-                                                    :
-                                                    <button className="projectsItemDeleteButton" onClick={() => {handleDeleteProject(item.project_id)}}>delete</button>
-                                                }
-                                            </>
+                                            <span className="projectsProjectTitle" onDoubleClick={() => {handleEditProject(item.project_id)}}>{item.project_name}</span>
                                         }
                                 </div>
                             )

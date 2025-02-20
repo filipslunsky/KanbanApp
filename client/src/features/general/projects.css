@@ -64,26 +64,6 @@
     color: #A445ED;
 }
 
-.projectsItemEditButton, .projectsItemDeleteButton {
-    border: none;
-    margin: 5px;
-    cursor: pointer;
-    background-color: inherit;
-    color: #f8f8f8;
-}
-
-.nightMode .projectsItemEditButton, .nightMode .projectsItemDeleteButton {
-    color: #2c2c38;
-}
-
-.currentProject .projectsItemEditButton, .currentProject .projectsItemDeleteButton {
-    color: #645fc6;
-}
-
-.projectsItemEditButton:hover, .projectsItemDeleteButton:hover {
-    color: inherit;
-}
-
 .projectsActiveItemContainer {
     height: 25px;
     display: flex;
@@ -92,7 +72,7 @@
 
 .projectsActiveItemContainer input {
     height: 25px;
-    width: 110px;
+    width: 60%;
     padding-left: 5px;
     border: none;
     border-radius: 5px;
@@ -115,13 +95,8 @@
     cursor: pointer;
 }
 
-.projectsActiveItemQuestion {
-    font-size: 13px;
-    margin-right: 10px;
-}
-
 .projectsActiveItemConfirmButton:hover {
-    color: black;
+    color: #A445ED;
 }
 
 .projectsActiveItemCancelButton:hover {
