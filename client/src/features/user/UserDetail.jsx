@@ -1,12 +1,16 @@
 import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { toggleProfileDetailWindow } from '../general/state/slice.js';
 import { logoutUser, editUserInfo, editUserPassword, deleteUser } from './state/slice.js';
 import crossIcon from '../../assets/img/icon-cross.svg';
 import './userDetail.css';
+import { updatePassword } from '../../../../controllers/usersController';
 
 const UserDetail = () => {
+    // global variables and states
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const user = useSelector(state => state.user.user);
 
@@ -16,8 +20,13 @@ const UserDetail = () => {
     const [deleteAccount, setDeleteAccount] = useState(false);
 
     const firstNameRef = useRef();
-    const lastNameRef = useRef();
+    const lastNameRef = useRef()    
+    const oldPasswordRef = useRef()    
+    const newPasswordRef = useRef()    
+    const newPasswordCheckRef = useRef()    
 
+
+    // click and doubleclick event handlers
     const handleClickClose = () => {
         dispatch(toggleProfileDetailWindow());
     };
@@ -46,6 +55,17 @@ const UserDetail = () => {
         setDeleteAccount(false);
     };
 
+    const handleEditPassword = () => {
+        if (oldPasswordRef.current.value === '' || newPasswordRef.current.value === '' || newPasswordCheckRef.current.value === '') return;
+        if (newPasswordRef.current.value !== newPasswordCheckRef.current.value) return;
+        dispatch(editUserPassword({
+            email: user.email,
+            oldPassword: oldPasswordRef.current.value,
+            newPassword: newPasswordRef.current.value,
+        }));
+        setEditPassword(false);
+    };
+
     const handleLogoutClick = () => {
         setEditInfo(false);
         setEditPassword(false);
@@ -53,11 +73,22 @@ const UserDetail = () => {
         setDeleteAccount(false);
     };
 
+    const handleLogout = () => {
+        dispatch(logoutUser());
+        setLogout(false);
+        navigate('/');
+    };
+
     const handleDeleteClick = () => {
         setEditInfo(false);
         setEditPassword(false);
         setLogout(false);
         setDeleteAccount(true);
+    };
+
+    const handleDeleteAccount = () => {
+        dispatch(deleteUser({email: user.email}));
+        setTimeout(navigate('/'), 4000);
     };
 
     const handleCancelClick = () => {
