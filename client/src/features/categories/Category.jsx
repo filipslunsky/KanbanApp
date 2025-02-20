@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useDroppable } from "@dnd-kit/core";
+import { SortableContext } from "@dnd-kit/sortable";
 import { updateCategory, deleteCategory, resetUpdateCategoryStatus, resetDeleteCategoryStatus } from './state/slice';
 import { setStatusMessage } from '../general/state/slice';
 import TaskItem from '../tasks/TaskItem';
@@ -14,6 +16,8 @@ const Category = ({categoryId, categoryName}) => {
     const nightMode = useSelector(state => state.general.nightMode);
     const tasks = useSelector(state => state.tasks.tasks);
     const tasksStatus = useSelector(state => state.tasks.tasksStatus);
+
+    const { setNodeRef } = useDroppable({ id: categoryId });
 
     const categoryNameRef = useRef();
 
@@ -115,16 +119,16 @@ const Category = ({categoryId, categoryName}) => {
                     }
                 </div>
             </div>
-            <div className="categoryTaskItemsContainer">
-                {
-                    filteredTasks.map(item => {
-                        return (
-                            <div className={nightMode ? "taskItemContainer nightMode" : "taskItemContainer"} key={item.task_id}>
-                                <TaskItem taskItem={item} />
-                            </div>
-                        )
-                    })
-                }
+            <div ref={setNodeRef} className="categoryTaskItemsContainer">
+                <SortableContext items={tasks.map(task => task.task_id)}>
+                    {
+                        filteredTasks.map(item => {
+                            return (
+                                    <TaskItem taskItem={item} key={item.task_id}/>
+                            )
+                        })
+                    }
+                </SortableContext>
             </div>
         </>
     );

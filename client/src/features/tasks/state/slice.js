@@ -219,7 +219,7 @@ export const updateTaskCategory = createAsyncThunk('tasks/updateTaskCategory', a
             throw new Error('User not found in local storage.');
         }
 
-        const response = await axios.put(
+        const response = await axios.post(
             `${BASE_URL}/tasks/category`,
             {
                 email: user.email,

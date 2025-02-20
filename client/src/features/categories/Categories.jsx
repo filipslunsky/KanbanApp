@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DndContext, closestCorners } from "@dnd-kit/core";
-import { SortableContext, arrayMove } from "@dnd-kit/sortable";
+import { updateTaskCategory } from '../tasks/state/slice.js';
 import { getCategories } from './state/slice';
 import { getTasks } from '../tasks/state/slice';
 import Category from './Category';
@@ -27,6 +27,7 @@ const Categories = () => {
     const updateSubtaskStatus = useSelector(state => state.tasks.updateSubtaskStatus);
     const deleteSubtaskStatus = useSelector(state => state.tasks.deleteSubtaskStatus);
     const addSubtaskStatus = useSelector(state => state.tasks.addSubtaskStatus);
+    const taskCategoryStatus = useSelector(state => state.tasks.taskCategoryStatus);
 
     // getting categories after loading and changing their items
     useEffect(() => {
@@ -40,7 +41,20 @@ const Categories = () => {
         if (currentProjectId !== null) {
             dispatch(getTasks({projectId: currentProjectId}));
         };
-        }, [dispatch, currentProjectId, addTaskStatus, deleteTaskStatus, updateSubtaskStatus, updateTaskStatus, deleteSubtaskStatus, addSubtaskStatus]);
+        }, [dispatch, currentProjectId, addTaskStatus, deleteTaskStatus, updateSubtaskStatus, updateTaskStatus, deleteSubtaskStatus, addSubtaskStatus, taskCategoryStatus]);
+
+    // drag and drop function
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (!over || active.id === over.id) return;
+    
+        const draggedTaskId = active.id;
+        const newCategoryId = over.id;
+    
+        if (!categories.some(category => category.category_id === newCategoryId)) return;
+    
+        dispatch(updateTaskCategory({ taskId: draggedTaskId, categoryId: newCategoryId }));
+    };
 
     if (categoriesStatus === 'loading') {
         return (<div className={nightMode ? "categoriesMainContainer nightMode" : "categoriesMainContainer"}>Loading...</div>)
@@ -52,21 +66,23 @@ const Categories = () => {
 
     return (
         <>
-            <div className={nightMode ? "categoriesMainContainer nightMode" : "categoriesMainContainer"}>
-                {
-                    categories.length > 0 && categories.map(item => {
-                        return (
-                            <div className="categoriesCategoryMainContainer" key={item.category_id}>
-                                <Category
-                                categoryId={item.category_id}
-                                categoryName={item.category_name}
-                                />
-                            </div>
-                        )
-                    })
-                }
-                <NewCategory />
-            </div>
+            <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+                <div className={nightMode ? "categoriesMainContainer nightMode" : "categoriesMainContainer"}>
+                    {
+                        categories.length > 0 && categories.map(item => {
+                            return (
+                                <div className="categoriesCategoryMainContainer" key={item.category_id}>
+                                    <Category
+                                    categoryId={item.category_id}
+                                    categoryName={item.category_name}
+                                    />
+                                </div>
+                            )
+                        })
+                    }
+                    <NewCategory />
+                </div>
+            </DndContext>
         </>
     );
 }
