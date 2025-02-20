@@ -15,6 +15,7 @@ const Navbar = () => {
     const projects = useSelector(state => state.general.projects);
     const projectsStatus = useSelector(state => state.general.projectsStatus);
 
+
     // extracting currentProject object from projects
     const getCurrentProject = () => {
         if (projectsStatus === 'success' && projects.length > 0) {

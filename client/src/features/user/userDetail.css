@@ -1,0 +1,97 @@
+.userDetailOuterContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: inherit;
+}
+
+.userDetailMainContainer {
+    width: 400px;
+    max-height: 500px;
+    background-color: #f8f8f8;
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.userDetailHeaderContainer {
+    height: 50px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.userDetailHeading {
+    font-size: 20px;
+}
+
+.userDetailCloseButton {
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.userDetailInfoContainer {
+    width: 90%;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userDetailName {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.userDetailEmail {
+    font-size: 15px;
+    color: #2c2c38;
+    margin-bottom: 10px;
+}
+
+.userDetailActiveContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.userDetailActiveContainer input {
+    width: 80%;
+    margin-bottom: 10px;
+    height: 30px;
+    border: none;
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+.userDetailActiveContainer input:focus {
+    outline: none;
+}
+
+.userDetailControlButton {
+    margin: 10px;
+    width: 15%;
+    border: none;
+    background-color: inherit;
+    color: #2c2c38;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.userDetailControlButton:hover {
+    color: #A445ED;
+}
