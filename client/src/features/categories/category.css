@@ -22,31 +22,16 @@
     align-items: center;
 }
 
-.categoryHeaderButton {
-    border: none;
-    background-color: inherit;
-    margin: 0 5px;
-    color: rgb(224, 224, 244);
-    font-size: 15px;
-    cursor: pointer;
-}
-
-.nightMode .categoryHeaderButton {
-    color: #21212d;
-}
-
-.categoryHeaderButton:hover {
-    color: #828fa3;
-}
-
 .categoryActiveContainer {
-    width: 100%;
+    width: 80%;
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
 }
 
 .categoryActiveContainer input {
-    width: 100px;
+    width: 80%;
+    height: 20px;
     border: none;
     border-radius: 5px;
     padding-left: 5px;
@@ -57,8 +42,10 @@
     outline: none;
 }
 
-.categoryConfirmQuestion {
-    color: #828fa3;
+.categoryActiveControlsContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
 }
 
 .categoryConfirmButton, .categoryCancelButton {

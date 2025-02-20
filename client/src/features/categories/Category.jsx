@@ -26,7 +26,6 @@ const Category = ({categoryId, categoryName}) => {
     // category edit handlers
     const handleUpdateClick = () => {
         setUpdateCategoryClicked(true);
-        setDeleteCategoryClicked(false);
     };
 
     const handleUpdateClickCancel = () => {
@@ -44,7 +43,6 @@ const Category = ({categoryId, categoryName}) => {
     // category delete handlers
     const handleDeleteClickOk = () => {
         dispatch(deleteCategory({categoryId}));
-        setDeleteCategoryClicked(false);
     };
 
     // status messages for edit/delete category (column)
@@ -77,27 +75,26 @@ const Category = ({categoryId, categoryName}) => {
 
     return (
         <>
-            <div className={nightMode ? "categoryTitleContainer nightMode" : "categoryTitleContainer"}>
-                
-                <div className="categoryControlsContainer">
-                    {
-                        updateCategoryClicked
-                        ?
-                        <div className="categoryActiveContainer">
-                            <input
-                            type="text"
-                            defaultValue={categoryName}
-                            ref={categoryNameRef}
-                            className='categoryNameEditInput'
-                            />
+            <div className={nightMode ? "categoryTitleContainer nightMode" : "categoryTitleContainer"}>    
+                {
+                    updateCategoryClicked
+                    ?
+                    <div className="categoryActiveContainer">
+                        <input
+                        type="text"
+                        defaultValue={categoryName}
+                        ref={categoryNameRef}
+                        className='categoryNameEditInput'
+                        />
+                        <div className="categoryActiveControlsContainer">
                             <button className="categoryConfirmButton" onClick={handleUdpateClickOk}>save</button>
                             <button className="categoryCancelButton" onClick={handleUpdateClickCancel}>cancel</button>
                             <button className="categoryConfirmButton" onClick={handleDeleteClickOk}>delete</button>
                         </div>
-                        :
-                        <h2 className="categoryTitle" onDoubleClick={handleUpdateClick} >{categoryName} ({filteredTasks.length})</h2>
-                    }
-                </div>
+                    </div>
+                    :
+                    <h2 className="categoryTitle" onDoubleClick={handleUpdateClick} >{categoryName} ({filteredTasks.length})</h2>
+                }
             </div>
             <div ref={setNodeRef} className="categoryTaskItemsContainer">
                 <SortableContext items={tasks.map(task => task.task_id)}>
