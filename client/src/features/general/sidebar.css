@@ -1,11 +1,13 @@
 .sideBarMainContainer {
-    width: 270px;
+    width: 250px;
     height: 99vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #f8f8f8;
     box-shadow: 2px 0px 0px #d1d1d1;
+    z-index: 2;
+    flex-shrink: 0;
 }
 
 .sideBarMainContainer.nightMode {
@@ -107,9 +109,9 @@ input:checked + .slider:before {
     margin-right: 10px;
 }
 
-/* @media (min-width: 568px) and (max-width: 1023px) {
+@media (min-width: 568px) and (max-width: 1023px) {
     .sideBarMainContainer {
-        width: 250px;
+        width: 240px;
     }
 }
 
@@ -117,4 +119,4 @@ input:checked + .slider:before {
     .sideBarMainContainer {
         width: 230px;
     }
-} */
+}

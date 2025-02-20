@@ -130,7 +130,7 @@
 @media (max-width: 567px) {
     .projectsItemContainer {
         height: 50px;
-        font-size: 12px;
+        font-size: 15px;
     }
     
     .projectsProjectIcon {
@@ -142,15 +142,5 @@
         margin-right: 5px;
     }
     
-    .projectsItemEditButton, .projectsItemDeleteButton {
-        font-size: 12px;
-        margin-right: 5px;
-        color: #828fa3;
-    }
-
-    .currentProject .projectsItemEditButton, .currentProject .projectsItemDeleteButton {
-        color: #828fa3;
-    }
-
 
 }
