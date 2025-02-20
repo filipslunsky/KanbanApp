@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toggleProfileDetailWindow } from '../general/state/slice.js';
-import { logoutUser, editUserInfo, editUserPassword, deleteUser } from './state/slice.js';
+import { logoutUser, editUserInfo, editUserPassword, deleteUser, resetEditInfoStatus, resetEditPasswordStatus } from './state/slice.js';
 import crossIcon from '../../assets/img/icon-cross.svg';
 import './userDetail.css';
 
@@ -12,6 +12,8 @@ const UserDetail = () => {
     const navigate = useNavigate();
 
     const user = useSelector(state => state.user.user);
+    const editInfoStatus = useSelector(state => state.user.editInfoStatus);
+    const editPasswordStatus = useSelector(state => state.user.editPasswordStatus);
 
     const [editInfo, setEditInfo] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
@@ -111,6 +113,30 @@ const UserDetail = () => {
         setDeleteAccount(false);
     };
 
+    // status messages for updateInfo and updatePassword
+    useEffect(()=> {
+        if (editInfoStatus === 'success') {
+            dispatch(setStatusMessage({ text: "User information successfully updated.", visible: true, style: 'success' }));
+            setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+            dispatch(resetEditInfoStatus());
+        } else if (editInfoStatus === 'failed') {
+            dispatch(setStatusMessage({ text: "Failed to update user information. Please try again.", visible: true, style: 'failed' }));
+            setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+            dispatch(resetEditInfoStatus());
+        }
+    }, [editInfoStatus]);
+
+    useEffect(()=> {
+        if (editPasswordStatus === 'success') {
+            dispatch(setStatusMessage({ text: "Password successfully updated.", visible: true, style: 'success' }));
+            setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+            dispatch(resetEditPasswordStatus());
+        } else if (editPasswordStatus === 'failed') {
+            dispatch(setStatusMessage({ text: "Failed to update password. Please try again.", visible: true, style: 'failed' }));
+            setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+            dispatch(resetEditPasswordStatus());
+        }
+    }, [editPasswordStatus]);
 
     return (
         <>
