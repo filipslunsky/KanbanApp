@@ -97,7 +97,11 @@ const UserDetail = () => {
 
     const handleDeleteAccount = () => {
         dispatch(deleteUser({email: user.email}));
-        setTimeout(navigate('/'), 4000);
+        dispatch(toggleProfileDetailWindow());
+        setTimeout(() => {
+            dispatch(logoutUser());
+            navigate('/');
+        }, 4000);
     };
 
     const handleCancelClick = () => {
@@ -159,18 +163,30 @@ const UserDetail = () => {
                         {
                             logout
                             ?
-                            ''
+                            <div className="userDetailActiveContainer">
+                                <span className="userDetailConfirmQuestion">
+                                    Are you sure you want to log out?
+                                </span>
+                                <button className="userDetailControlButton" onClick={handleLogout}>Yes</button>
+                                <button className="userDetailControlButton" onClick={handleCancelClick}>No</button>
+                            </div>
                             :
-                            ''
+                            <button className="logoutButton" onClick={handleLogoutClick}>Logout</button>
                         }
                     </div>
                     <div className="userDetailDeleteContainer">
                         {
                             deleteAccount
                             ?
-                            ''
+                            <div className="userDetailActiveContainer">
+                                <span className="userDetailConfirmQuestion">
+                                    Are you sure you want to delete your account? This action is irreversible.
+                                </span>
+                                <button className="userDetailControlButton" onClick={handleDeleteAccount}>Yes</button>
+                                <button className="userDetailControlButton" onClick={handleCancelClick}>No</button>
+                            </div>
                             :
-                            ''
+                            <button className="deleteButton" onClick={handleDeleteClick}>Delete Account</button>
                         }
                     </div>
                 </div>
