@@ -12,6 +12,7 @@ const initialState = {
     addSubtaskStatus: '',
     updateSubtaskStatus: '',
     deleteSubtaskStatus: '',
+    taskCategoryStatus: '',
     error: null,
 };
 
@@ -209,6 +210,32 @@ export const deleteSubtask = createAsyncThunk('tasks/deleteSubtask', async (dele
     }
 });
 
+export const updateTaskCategory = createAsyncThunk('tasks/updateTaskCategory', async (updateItem, { rejectWithValue }) => {
+    try {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const headers = getHeaders();
+
+        if (!user || !user.email) {
+            throw new Error('User not found in local storage.');
+        }
+
+        const response = await axios.put(
+            `${BASE_URL}/tasks/category`,
+            {
+                email: user.email,
+                taskId: updateItem.taskId,
+                categoryId: updateItem.categoryId,
+            },
+            { headers }
+        );
+
+        return response.data.task;
+
+    } catch (error) {
+        return rejectWithValue(error.response?.data?.message || error.message);
+    }
+});
+
 const tasksSlice = createSlice({
     name: 'tasks',
     initialState,
@@ -317,6 +344,18 @@ const tasksSlice = createSlice({
             })
             .addCase(deleteSubtask.fulfilled, (state) => {
                 state.deleteSubtaskStatus = 'success';
+                state.error = null;
+            })
+            .addCase(updateTaskCategory.pending, (state) => {
+                state.taskCategoryStatus = 'loading';
+                state.error = null;
+            })
+            .addCase(updateTaskCategory.rejected, (state, action) => {
+                state.taskCategoryStatus = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(updateTaskCategory.fulfilled, (state) => {
+                state.taskCategoryStatus = 'success';
                 state.error = null;
             })
     },
