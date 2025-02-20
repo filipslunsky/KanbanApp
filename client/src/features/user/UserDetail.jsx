@@ -5,7 +5,6 @@ import { toggleProfileDetailWindow } from '../general/state/slice.js';
 import { logoutUser, editUserInfo, editUserPassword, deleteUser } from './state/slice.js';
 import crossIcon from '../../assets/img/icon-cross.svg';
 import './userDetail.css';
-import { updatePassword } from '../../../../controllers/usersController';
 
 const UserDetail = () => {
     // global variables and states
@@ -16,6 +15,7 @@ const UserDetail = () => {
 
     const [editInfo, setEditInfo] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
+    const [passwordMatch, setPasswordMatch] = useState(false);
     const [logout, setLogout] = useState(false);
     const [deleteAccount, setDeleteAccount] = useState(false);
 
@@ -53,6 +53,15 @@ const UserDetail = () => {
         setEditPassword(true);
         setLogout(false);
         setDeleteAccount(false);
+    };
+
+    const checkPasswordMatch = () => {
+        if (newPasswordRef.current.value === '') return;
+        if (newPasswordRef.current.value === newPasswordCheckRef.current.value) {
+            setPasswordMatch(true);
+        } else {
+            setPasswordMatch(false);
+        }
     };
 
     const handleEditPassword = () => {
@@ -126,9 +135,24 @@ const UserDetail = () => {
                         {
                             editPassword
                             ?
-                            ''
+                            <div className="userDetailActiveContainer">
+                                <input type="password" ref={oldPasswordRef} />
+                                <input type="password" ref={newPasswordRef} />
+                                <input type="password" ref={newPasswordCheckRef} />
+                                <span className="userDetailPasswordCheckMessage">
+                                    {
+                                        passwordMatch
+                                        ?
+                                        "Passwords match."
+                                        :
+                                        "Passwords don't match"
+                                    }
+                                </span>
+                                <button className="userDetailControlButton" onClick={handleEditPassword}>OK</button>
+                                <button className="userDetailControlButton" onClick={handleCancelClick}>cancel</button>
+                            </div>
                             :
-                            ''
+                            <button className="userDetailChangePassword" onClick={handleEditPasswordClick}>Change Password</button>
                         }
                     </div>
                     <div className="userDetailLogoutContainer">
