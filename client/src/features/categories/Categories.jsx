@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { DndContext, closestCorners } from "@dnd-kit/core";
+import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { getCategories } from './state/slice';
 import { getTasks } from '../tasks/state/slice';
 import Category from './Category';

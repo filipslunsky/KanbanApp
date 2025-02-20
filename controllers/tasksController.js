@@ -3,6 +3,7 @@ const {
     _updateTaskById,
     _deleteTaskById,
     _getTasksByProjectId,
+    _updateTaskCategoryByTaskId,
 } = require('../models/tasksModel.js');
 
 const addTask = async (req, res) => {
@@ -65,10 +66,26 @@ const getTasksByProjectId = async (req, res) => {
     }
 };
 
+const updateTaskCategoryByTaskId = async (req, res) => {
+    const { taskId, categoryId } = req.body;
+    try {
+        const data = await _updateTaskCategoryByTaskId(taskId, categoryId);
+        if (data.success) {
+            res.status(200).json(data);
+        } else {
+            res.status(400).json(data);
+        };
+    } catch (error) {
+        console.log('Error:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
 module.exports = {
     addTask,
     updateTaskById,
     deleteTaskById,
     getTasksByProjectId,
+    updateTaskCategoryByTaskId,
 };
 
