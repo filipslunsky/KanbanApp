@@ -11,7 +11,6 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
     background-color: rgb(224, 224, 244);
-    z-index: 0;
 }
 
 .categoriesMainContainer::-webkit-scrollbar {
