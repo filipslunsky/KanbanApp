@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { toggleProfileDetailWindow } from '../general/state/slice.js';
+import { toggleProfileDetailWindow, setStatusMessage } from '../general/state/slice.js';
 import { logoutUser, editUserInfo, editUserPassword, deleteUser, resetEditInfoStatus, resetEditPasswordStatus } from './state/slice.js';
 import crossIcon from '../../assets/img/icon-cross.svg';
 import './userDetail.css';
@@ -14,6 +14,7 @@ const UserDetail = () => {
     const user = useSelector(state => state.user.user);
     const editInfoStatus = useSelector(state => state.user.editInfoStatus);
     const editPasswordStatus = useSelector(state => state.user.editPasswordStatus);
+    const nightMode = useSelector(state => state.general.nightMode);
 
     const [editInfo, setEditInfo] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
@@ -141,7 +142,7 @@ const UserDetail = () => {
     return (
         <>
             <div className="userDetailOuterContainer">
-                <div className="userDetailMainContainer">
+                <div className={nightMode ? "userDetailMainContainer nightMode" : "userDetailMainCotainer"}>
                     <div className="userDetailHeaderContainer">
                         <h2 className="userDetailHeading">User Information</h2>
                         <button className="userDetailCloseButton" onClick={handleClickClose}><img src={crossIcon} alt="icon" /></button>

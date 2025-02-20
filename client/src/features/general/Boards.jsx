@@ -5,6 +5,7 @@ import Categories from "../categories/Categories";
 import NewTask from "../tasks/NewTask";
 import TaskDetail from "../tasks/TaskDetail";
 import UserDetail from '../user/UserDetail';
+import StatusMessage from './StatusMessage';
 import './boards.css';
 
 const Boards = () => {
@@ -13,6 +14,7 @@ const Boards = () => {
     const newTaskWindow = useSelector(state => state.general.newTaskWindow);
     const editTaskWindow = useSelector(state => state.general.editTaskWindow);
     const profileDetail = useSelector(state => state.general.profileDetail);
+    const statusMessage = useSelector(state => state.general.statusMessage);
 
     return (
         <>
@@ -40,6 +42,7 @@ const Boards = () => {
             {newTaskWindow && <NewTask />}
             {editTaskWindow && <TaskDetail />}
             {profileDetail && <UserDetail />}
+            {statusMessage.visible && <StatusMessage/>}
         </>
     );
 }

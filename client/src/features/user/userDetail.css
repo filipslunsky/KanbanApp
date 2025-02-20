@@ -33,6 +33,11 @@
     }
 }
 
+.userDetailMainContainer.nightMode {
+    background-color: #2c2c38;
+    color: white;
+}
+
 .userDetailHeaderContainer {
     height: 50px;
     width: 90%;

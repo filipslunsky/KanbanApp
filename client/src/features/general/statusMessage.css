@@ -1,15 +1,23 @@
 .statusMessageMainContainer {
-    background-color: blue;
     height: 35px;
     width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    bottom: 130px;
+    bottom: 20%;
+    left: 30%;
     z-index: 6;
     border-radius: 10px;
     opacity: 80%;
+}
+
+.statusMessageMainContainer.success {
+    background-color: green;
+}
+
+.statusMessageMainContainer.failed {
+    background-color: red;
 }
 
 .statusMessageText {
@@ -22,6 +30,7 @@
 @media (min-width: 768px) and (max-width: 1023px) {
     .statusMessageMainContainer {
         width: 60%;
+        left: 20%;
     }
 }
 
@@ -29,5 +38,6 @@
 @media (max-width: 767px) {
     .statusMessageMainContainer {
         width: 80%;
+        left: 10%;
     }
 }
