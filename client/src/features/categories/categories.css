@@ -24,7 +24,6 @@
 }
 
 .categoriesCategoryMainContainer {
-    max-width: 90%;
     flex: 0 0 320px;
     height: 99%;
     display: flex;
