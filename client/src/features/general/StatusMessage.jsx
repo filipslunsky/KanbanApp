@@ -3,7 +3,6 @@ import './statusMessage.css';
 
 const StatusMessage = () => {
     const statusMessage = useSelector(state => state.general.statusMessage);
-    console.log(statusMessage);
 
     return (
         <>

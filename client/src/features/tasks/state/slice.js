@@ -69,7 +69,7 @@ export const addTask = createAsyncThunk('tasks/addTask', async (addItem, { rejec
             { headers }
         );
 
-        return response.data.task;
+        return response.data;
 
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
@@ -282,9 +282,10 @@ const tasksSlice = createSlice({
                 state.addTaskStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(addTask.fulfilled, (state) => {
+            .addCase(addTask.fulfilled, (state, action) => {
                 state.addTaskStatus = 'success';
                 state.error = null;
+                state.tasks = {...tasks, action}
             })
             .addCase(updateTask.pending, (state) => {
                 state.updateTaskStatus = 'loading';
