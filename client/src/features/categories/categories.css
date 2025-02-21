@@ -11,6 +11,8 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
     background-color: rgb(224, 224, 244);
+    flex: 1;
+    min-width: 100%;
 }
 
 .categoriesMainContainer::-webkit-scrollbar {
@@ -22,6 +24,7 @@
 }
 
 .categoriesCategoryMainContainer {
+    max-width: 90%;
     flex: 0 0 320px;
     height: 99%;
     display: flex;
