@@ -142,7 +142,7 @@ const UserDetail = () => {
     return (
         <>
             <div className="userDetailOuterContainer">
-                <div className={nightMode ? "userDetailMainContainer nightMode" : "userDetailMainCotainer"}>
+                <div className={nightMode ? "userDetailMainContainer nightMode" : "userDetailMainContainer"}>
                     <div className="userDetailHeaderContainer">
                         <h2 className="userDetailHeading">User Information</h2>
                         <button className="userDetailCloseButton" onClick={handleClickClose}><img src={crossIcon} alt="icon" /></button>
