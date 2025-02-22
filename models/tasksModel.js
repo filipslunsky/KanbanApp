@@ -114,6 +114,7 @@ const _deleteTaskById = async (taskId) => {
             return { 
                 success: true, 
                 message: 'task successfully deleted',
+                deletedTaskId: taskId,
             };
         });
     } catch (error) {

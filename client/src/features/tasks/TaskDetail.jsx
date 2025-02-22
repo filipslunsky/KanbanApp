@@ -32,6 +32,7 @@ const TaskDetail = () => {
     const newSubtaskNameRef = useRef();
 
     const currentTask = tasks.filter(item => item.task_id === currentTaskId)[0];
+    console.log(currentTask);
 
     const tasksCompleted = currentTask.subtasks.filter(item => item.is_completed === true);
 

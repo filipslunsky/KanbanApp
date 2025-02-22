@@ -97,7 +97,7 @@ export const updateTask = createAsyncThunk('tasks/updateTask', async (updateItem
             { headers }
         );
 
-        return response.data.task;
+        return response.data;
 
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
@@ -105,8 +105,6 @@ export const updateTask = createAsyncThunk('tasks/updateTask', async (updateItem
 });
 
 export const deleteTask = createAsyncThunk('tasks/deleteTask', async (deleteItem, { rejectWithValue }) => {
-    console.log('triggered');
-    console.log(deleteItem);
     try {
         const user = JSON.parse(localStorage.getItem('user'));
         const headers = getHeaders();
@@ -124,8 +122,7 @@ export const deleteTask = createAsyncThunk('tasks/deleteTask', async (deleteItem
             { headers }
         );
 
-        console.log(response.data);
-        return response.data.task;
+        return response.data;
 
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
@@ -285,7 +282,7 @@ const tasksSlice = createSlice({
             .addCase(addTask.fulfilled, (state, action) => {
                 state.addTaskStatus = 'success';
                 state.error = null;
-                state.tasks = {...tasks, action}
+                state.tasks.push(action.payload.newTask);
             })
             .addCase(updateTask.pending, (state) => {
                 state.updateTaskStatus = 'loading';
@@ -295,9 +292,16 @@ const tasksSlice = createSlice({
                 state.updateTaskStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(updateTask.fulfilled, (state) => {
+            .addCase(updateTask.fulfilled, (state, action) => {
                 state.updateTaskStatus = 'success';
                 state.error = null;
+                const updatedTask = action.payload.task;
+                const index = state.tasks.findIndex(task => task.task_id === updatedTask.task_id);
+                if (index !== -1) {
+                    const previousSubtasks = state.tasks[index].subtasks;
+                    const updatedTaskWithSubtasks = {...updatedTask, subtasks: previousSubtasks};
+                    state.tasks[index] = updatedTaskWithSubtasks;
+                }
             })
             .addCase(deleteTask.pending, (state) => {
                 state.deleteTaskStatus = 'loading';
@@ -307,9 +311,14 @@ const tasksSlice = createSlice({
                 state.deleteTaskStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(deleteTask.fulfilled, (state) => {
+            .addCase(deleteTask.fulfilled, (state, action) => {
                 state.deleteTaskStatus = 'success';
                 state.error = null;
+                const deletedTaskId = action.payload.deletedTaskId;
+                const index = state.tasks.findIndex(task => task.task_id === deletedTaskId);
+                if (index !== -1) {
+                    state.tasks.splice(index, 1);
+                }
             })
             .addCase(addSubtask.pending, (state) => {
                 state.addSubtaskStatus = 'loading';
