@@ -328,9 +328,12 @@ const tasksSlice = createSlice({
                 state.addSubtaskStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(addSubtask.fulfilled, (state) => {
+            .addCase(addSubtask.fulfilled, (state, action) => {
                 state.addSubtaskStatus = 'success';
                 state.error = null;
+                const newSubtask = action.payload;
+                const index = state.tasks.findIndex(task => task.task_id === newSubtask.task_id);
+                state.tasks[index].subtasks.push(newSubtask);
             })
             .addCase(updateSubtask.pending, (state) => {
                 state.updateSubtaskStatus = 'loading';
@@ -340,9 +343,20 @@ const tasksSlice = createSlice({
                 state.updateSubtaskStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(updateSubtask.fulfilled, (state) => {
+            .addCase(updateSubtask.fulfilled, (state, action) => {
                 state.updateSubtaskStatus = 'success';
                 state.error = null;
+                const updatedSubtask = action.payload;
+                const taskIndex = state.tasks.findIndex(task => task.task_id === updatedSubtask.task_id);
+                if (taskIndex !== -1) {
+                    const updatedTask = state.tasks[taskIndex];
+                    const subtaskIndex = updatedTask.subtasks.findIndex(subtask => subtask.subtask_id === updatedSubtask.subtask_id);
+                    if (subtaskIndex !== -1) {
+                        const updatedSubtasks = [...updatedTask.subtasks];
+                        updatedSubtasks[subtaskIndex] = updatedSubtask;
+                        state.tasks[taskIndex] = { ...updatedTask, subtasks: updatedSubtasks };
+                    }
+                }
             })
             .addCase(deleteSubtask.pending, (state) => {
                 state.deleteSubtaskStatus = 'loading';
