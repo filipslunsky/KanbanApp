@@ -1,6 +1,7 @@
 .categoriesMainContainer {
     width: 98.3%;
     height: 86.8vh;
+    /* height: 100%; */
     display: flex;
     align-items: center;
     padding: 10px;
