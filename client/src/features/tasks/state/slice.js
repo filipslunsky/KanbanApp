@@ -226,7 +226,7 @@ export const updateTaskCategory = createAsyncThunk('tasks/updateTaskCategory', a
             { headers }
         );
 
-        return response.data.task;
+        return response.data;
 
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
@@ -364,9 +364,17 @@ const tasksSlice = createSlice({
                 state.taskCategoryStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(updateTaskCategory.fulfilled, (state) => {
+            .addCase(updateTaskCategory.fulfilled, (state, action) => {
                 state.taskCategoryStatus = 'success';
                 state.error = null;
+                const updatedTask = action.payload.task;
+                const index = state.tasks.findIndex(task => task.task_id === updatedTask.task_id);
+                if (index !== -1) {
+                    const previousSubtasks = state.tasks[index].subtasks;
+                    const updatedTaskWithSubtasks = {...updatedTask, subtasks: previousSubtasks};
+                    state.tasks[index] = updatedTaskWithSubtasks;
+                }
+                
             })
     },
     
