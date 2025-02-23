@@ -21,9 +21,12 @@ app.use('/categories', categoriesRouter);
 app.use('/tasks', tasksRouter);
 app.use('/subtasks', subtasksRouter);
 
-app.use(express.static(path.join(__dirname, "/client/dist")));
+app.use(express.static(path.join(__dirname, "client/dist")));
+
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "client/dist", "index.html"));
 });
 
 app.listen(PORT, () => {
