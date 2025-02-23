@@ -41,7 +41,7 @@ const Categories = () => {
         if (currentProjectId !== null) {
             dispatch(getTasks({projectId: currentProjectId}));
         };
-        }, [dispatch, currentProjectId, deleteSubtaskStatus]);
+        }, [dispatch, currentProjectId]);
 
     // drag and drop function
     const handleDragEnd = (event) => {

@@ -200,7 +200,7 @@ export const deleteSubtask = createAsyncThunk('tasks/deleteSubtask', async (dele
             { headers }
         );
 
-        return response.data.subtask;
+        return response.data;
 
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
@@ -366,9 +366,19 @@ const tasksSlice = createSlice({
                 state.deleteSubtaskStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(deleteSubtask.fulfilled, (state) => {
+            .addCase(deleteSubtask.fulfilled, (state, action) => {
                 state.deleteSubtaskStatus = 'success';
                 state.error = null;
+                const taskId = action.payload.subtask.task_id;
+                const subtaskId = action.payload.subtask.subtask_id;
+                const taskIndex = state.tasks.findIndex(task => task.task_id === taskId);
+                if (taskIndex !== -1) {
+                    const subtaskIndex = state.tasks[taskIndex].subtasks.findIndex(subtask => subtask.subtask_id === subtaskId);
+                    if (subtaskIndex !== -1) {
+                        state.tasks[taskIndex].subtasks.splice(subtaskIndex, 1);
+                    };
+                };
+                
             })
             .addCase(updateTaskCategory.pending, (state) => {
                 state.taskCategoryStatus = 'loading';

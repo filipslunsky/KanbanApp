@@ -68,7 +68,7 @@ const _deleteSubtaskById = async (subtaskId) => {
     try {
         return await db.transaction(async (trx) => {
             const subtask = await trx('subtasks')
-            .select('subtask_id')
+            .select('subtask_id', 'task_id')
             .where({subtask_id: subtaskId})
             .first();
 
@@ -80,7 +80,9 @@ const _deleteSubtaskById = async (subtaskId) => {
             .delete()
             .where({subtask_id: subtask.subtask_id});
 
-            return { success: true, message: 'Subtask successfully deleted' };
+            console.log(subtask);
+
+            return { success: true, message: 'Subtask successfully deleted', subtask };
         });
         
     } catch (error) {
