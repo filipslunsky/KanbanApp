@@ -27,7 +27,6 @@ const Projects = () => {
     const nightMode = useSelector(state => state.general.nightMode);
 
     const [editProject, setEditProject] = useState(0);
-    const [removeProject, setRemoveProject] = useState(0);
     const [createProject, setCreateProject] = useState(false);
 
     const projectNameRef = useRef();
@@ -36,7 +35,7 @@ const Projects = () => {
     // projects loading
     useEffect(() => {
         dispatch(getProjects());
-    }, [dispatch, deleteProjectStatus]);
+    }, [dispatch]);
 
     useEffect(() => {
         if (projects.length > 0) {
@@ -106,25 +105,14 @@ const Projects = () => {
     };
 
     // deleteProject onClick funcs
-    const handleDeleteProject = (projectId) => {
-        setRemoveProject(projectId);
-        setCreateProject(false);
-    };
-
-    const handleCancelDeleteProject = () => {
-        setRemoveProject(0);
-    };
-
     const handleOkDeleteProject = (projectId) => {
         dispatch(deleteProject({projectId}));
-        setRemoveProject(0);
     };
 
     // addProject onClick funcs
     const handleCreateProject = () => {
         setCreateProject(true);
         setEditProject(0);
-        setRemoveProject(0);
     };
 
     const handleOkCreateProject = () => {

@@ -229,9 +229,14 @@ const generalSlice = createSlice({
                 state.deleteProjectStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(deleteProject.fulfilled, (state) => {
+            .addCase(deleteProject.fulfilled, (state, action) => {
                 state.deleteProjectStatus = 'success';
                 state.error = null;
+                const deletedProjectId = action.payload.deletedProjectId;
+                const index = state.projects.findIndex(project => project.project_id === deletedProjectId);
+                if (index !== -1) {
+                    state.projects.splice(index, 1);
+                };
             })
     },
     
