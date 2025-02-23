@@ -212,9 +212,14 @@ const generalSlice = createSlice({
                 state.updateProjectStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(updateProject.fulfilled, (state) => {
+            .addCase(updateProject.fulfilled, (state, action) => {
                 state.updateProjectStatus = 'success';
                 state.error = null;
+                const updatedProject = action.payload.project;
+                const index = state.projects.findIndex(project => project.project_id === updatedProject.project_id);
+                if (index !== -1) {
+                    state.projects[index] = updatedProject;
+                };
             })
             .addCase(deleteProject.pending, (state) => {
                 state.deleteProjectStatus = 'loading';

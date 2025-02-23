@@ -36,7 +36,7 @@ const Projects = () => {
     // projects loading
     useEffect(() => {
         dispatch(getProjects());
-    }, [dispatch, updateProjectStatus, deleteProjectStatus]);
+    }, [dispatch, deleteProjectStatus]);
 
     useEffect(() => {
         if (projects.length > 0) {
