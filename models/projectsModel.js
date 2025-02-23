@@ -16,7 +16,7 @@ const _addProject = async (projectName, userId) => {
                 user_id: user.user_id,
                 project_name: projectName,
             })
-            .returning('project_name', 'project_id', 'user_id');
+            .returning(['project_name', 'project_id', 'user_id']);
 
             return { 
                 success: true, 
@@ -73,13 +73,15 @@ const _deleteProjectById = async (projectId) => {
                 return { success: false, message: 'Project not found' };
             };
 
-            await trx('projects')
+            const deletedProject = await trx('projects')
             .delete()
-            .where({project_id: projectId});
+            .where({project_id: projectId})
+            .returning('project_id');
 
             return { 
                 success: true, 
                 message: 'Project successfully deleted',
+                deletedProjectId: deletedProject[0].project_id,
             };
         });
     } catch (error) {

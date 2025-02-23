@@ -75,7 +75,7 @@ export const addProject = createAsyncThunk('general/addProject', async (addItem,
             { headers }
         );
 
-        return response.data.project;
+        return response.data;
 
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
@@ -101,7 +101,7 @@ export const updateProject = createAsyncThunk('general/updateProject', async (up
             { headers }
         );
 
-        return response.data.project;
+        return response.data;
 
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
@@ -126,7 +126,7 @@ export const deleteProject = createAsyncThunk('general/deleteProject', async (de
             { headers }
         );
 
-        return response.data.project;
+        return response.data;
 
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
@@ -198,9 +198,11 @@ const generalSlice = createSlice({
                 state.addProjectStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(addProject.fulfilled, (state) => {
+            .addCase(addProject.fulfilled, (state, action) => {
                 state.addProjectStatus = 'success';
                 state.error = null;
+                const newProject = action.payload.project;
+                state.projects.push(newProject);
             })
             .addCase(updateProject.pending, (state) => {
                 state.updateProjectStatus = 'loading';
