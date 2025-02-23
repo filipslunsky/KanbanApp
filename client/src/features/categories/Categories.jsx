@@ -21,20 +21,13 @@ const Categories = () => {
     const addCategoryStatus = useSelector(state => state.categories.addCategoryStatus);
     const tasks = useSelector(state => state.tasks.tasks);
     const tasksStatus = useSelector(state => state.tasks.tasksStatus);
-    // const addTaskStatus = useSelector(state => state.tasks.addTaskStatus);
-    // const deleteTaskStatus = useSelector(state => state.tasks.deleteTaskStatus);
-    // const updateTaskStatus = useSelector(state => state.tasks.updateTaskStatus);
-    // const updateSubtaskStatus = useSelector(state => state.tasks.updateSubtaskStatus);
-    // const deleteSubtaskStatus = useSelector(state => state.tasks.deleteSubtaskStatus);
-    // const addSubtaskStatus = useSelector(state => state.tasks.addSubtaskStatus);
-    // const taskCategoryStatus = useSelector(state => state.tasks.taskCategoryStatus);
 
     // getting categories after loading and changing their items
     useEffect(() => {
         if (currentProjectId != null) {
             dispatch(getCategories({projectId: currentProjectId}));
         };
-    }, [dispatch, currentProjectId, updateCategoryStatus, deleteCategoryStatus, addCategoryStatus]);
+    }, [dispatch, currentProjectId]);
 
     // getting tasks after loading and changing their items
     useEffect(() => {

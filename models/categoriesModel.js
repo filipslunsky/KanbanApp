@@ -73,13 +73,15 @@ const _deleteCategoryById = async (categoryId) => {
                 return { success: false, message: 'Category not found' };
             };
 
-            await trx('categories')
+            const deletedCategory = await trx('categories')
             .delete()
-            .where({category_id: category.category_id});
+            .where({category_id: category.category_id})
+            .returning('category_id');
 
             return { 
                 success: true, 
                 message: 'Category successfully deleted',
+                deletedCategoryId: deletedCategory[0].category_id,
             };
         });
     } catch (error) {

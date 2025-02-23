@@ -63,7 +63,7 @@ export const addCategory = createAsyncThunk('categories/addCategory', async (add
             { headers }
         );
 
-        return response.data.category;
+        return response.data;
 
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
@@ -89,7 +89,7 @@ export const updateCategory = createAsyncThunk('categories/updateCategory', asyn
             { headers }
         );
 
-        return response.data.category;
+        return response.data;
 
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
@@ -114,7 +114,7 @@ export const deleteCategory = createAsyncThunk('categories/deleteCategory', asyn
             { headers }
         );
 
-        return response.data.category;
+        return response.data;
 
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
@@ -158,9 +158,10 @@ const categoriesSlice = createSlice({
                 state.addCategoryStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(addCategory.fulfilled, (state) => {
+            .addCase(addCategory.fulfilled, (state, action) => {
                 state.addCategoryStatus = 'success';
                 state.error = null;
+                state.categories.push(action.payload.category);
             })
             .addCase(updateCategory.pending, (state) => {
                 state.updateCategoryStatus = 'loading';
@@ -170,9 +171,14 @@ const categoriesSlice = createSlice({
                 state.updateCategoryStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(updateCategory.fulfilled, (state) => {
+            .addCase(updateCategory.fulfilled, (state, action) => {
                 state.updateCategoryStatus = 'success';
                 state.error = null;
+                const updatedCategory = action.payload.category;
+                const index = state.categories.findIndex(category => category.category_id === updatedCategory.category_id);
+                if (index !== -1) {
+                    state.categories[index] = updatedCategory;
+                };
             })
             .addCase(deleteCategory.pending, (state) => {
                 state.deleteCategoryStatus = 'loading';
@@ -182,9 +188,14 @@ const categoriesSlice = createSlice({
                 state.deleteCategoryStatus = 'failed';
                 state.error = action.payload;
             })
-            .addCase(deleteCategory.fulfilled, (state) => {
+            .addCase(deleteCategory.fulfilled, (state, action) => {
                 state.deleteCategoryStatus = 'success';
                 state.error = null;
+                const deletedCategoryId = action.payload.deletedCategoryId;
+                const index = state.categories.findIndex(category => category.category_id === deletedCategoryId);
+                if (index !== -1) {
+                    state.categories.splice(index, 1);
+                };
             })
     },
     

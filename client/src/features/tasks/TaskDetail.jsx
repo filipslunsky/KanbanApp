@@ -15,9 +15,6 @@ const TaskDetail = () => {
     const currentTaskId = useSelector(state => state.general.currentTaskId);
     const categories = useSelector(state => state.categories.categories);
     const tasks = useSelector(state => state.tasks.tasks);
-    // const addSubtaskStatus = useSelector(state => state.tasks.addSubtaskStatus);
-    // const updateSubtaskStatus = useSelector(state => state.tasks.updateSubtaskStatus);
-    // const deleteSubtaskStatus = useSelector(state => state.tasks.deleteSubtaskStatus);
 
     const [editTaskName, setEditTaskName] = useState(false);
     const [editTaskDescription, setEditTaskDescription] = useState(false);
